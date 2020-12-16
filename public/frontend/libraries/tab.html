@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tab</title>
+    <script src="jquery/jquery.min.js"></script>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="tab.css" rel="stylesheet">
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    
+</head>
+<body>
+<!-- Tabs -->
+    <section id="tabs">
+        <div class="container">
+            <h6 class="section-title h1">Tabs</h6>
+            <div class="row">
+                <div class="col-md-12 ">
+                    <nav>
+                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+                            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+                            <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">About</a>
+                        </div>
+                    </nav>
+                    <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                <!-- Content Row -->
+                                <div class="row">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Travel</th>
+                                                    <th>Gambar</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @forelse($items as $item)
+                                                    <tr>
+                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $item->travel_package->title }}</td>
+                                                        <td>
+                                                            <img src="{{ Storage::url($item->image) }}" alt="" style="width: 150px" class="img-thumbnail">
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ route('gallery.edit', $item->id) }}" class="btn btn-info">
+                                                                <i class="fa fa-pencil-alt"></i>
+                                                            </a>
+                                                            <form action="{{ route('gallery.destroy', $item->id) }}" method="post" class="d-inline">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <button class="btn btn-danger">
+                                                                    <i class="fa fa-trash"></i>
+                                                                </button>
+                                                            </form>
+
+                                                        </td>
+                                                    </tr>
+                                                @empty
+                                                    <td colspan="7" class="text-center">
+                                                        Data Kosong
+                                                    </td>
+                                                @endforelse
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                <!-- Content Row -->
+                                <div class="row">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Travel</th>
+                                                    <th>Gambar</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @forelse($items as $item)
+                                                    <tr>
+                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $item->travel_package->title }}</td>
+                                                        <td>
+                                                            <img src="{{ Storage::url($item->image) }}" alt="" style="width: 150px" class="img-thumbnail">
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ route('gallery.edit', $item->id) }}" class="btn btn-info">
+                                                                <i class="fa fa-pencil-alt"></i>
+                                                            </a>
+                                                            <form action="{{ route('gallery.destroy', $item->id) }}" method="post" class="d-inline">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <button class="btn btn-danger">
+                                                                    <i class="fa fa-trash"></i>
+                                                                </button>
+                                                            </form>
+
+                                                        </td>
+                                                    </tr>
+                                                @empty
+                                                    <td colspan="7" class="text-center">
+                                                        Data Kosong
+                                                    </td>
+                                                @endforelse
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                                <div class="row">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Travel</th>
+                                                    <th>Gambar</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @forelse($items as $item)
+                                                    <tr>
+                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $item->travel_package->title }}</td>
+                                                        <td>
+                                                            <img src="{{ Storage::url($item->image) }}" alt="" style="width: 150px" class="img-thumbnail">
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ route('gallery.edit', $item->id) }}" class="btn btn-info">
+                                                                <i class="fa fa-pencil-alt"></i>
+                                                            </a>
+                                                            <form action="{{ route('gallery.destroy', $item->id) }}" method="post" class="d-inline">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <button class="btn btn-danger">
+                                                                    <i class="fa fa-trash"></i>
+                                                                </button>
+                                                            </form>
+
+                                                        </td>
+                                                    </tr>
+                                                @empty
+                                                    <td colspan="7" class="text-center">
+                                                        Data Kosong
+                                                    </td>
+                                                @endforelse
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+                                <div class="row">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Travel</th>
+                                                    <th>Gambar</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @forelse($items as $item)
+                                                    <tr>
+                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $item->travel_package->title }}</td>
+                                                        <td>
+                                                            <img src="{{ Storage::url($item->image) }}" alt="" style="width: 150px" class="img-thumbnail">
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ route('gallery.edit', $item->id) }}" class="btn btn-info">
+                                                                <i class="fa fa-pencil-alt"></i>
+                                                            </a>
+                                                            <form action="{{ route('gallery.destroy', $item->id) }}" method="post" class="d-inline">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <button class="btn btn-danger">
+                                                                    <i class="fa fa-trash"></i>
+                                                                </button>
+                                                            </form>
+
+                                                        </td>
+                                                    </tr>
+                                                @empty
+                                                    <td colspan="7" class="text-center">
+                                                        Data Kosong
+                                                    </td>
+                                                @endforelse
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- ./Tabs -->
+</body>
+</html>
+

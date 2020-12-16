@@ -1,0 +1,438 @@
+.con {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: -90px;
+  margin-top: -20px;
+}
+
+@media (min-width: 576px) {
+  .con {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .con {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .con {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .con {
+    max-width: 1140px;
+  }
+}
+
+.con-fluid {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.req .info-wrap {
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  margin-bottom: 50px;
+  padding: 20px;
+  background: #fff;
+}
+
+.req .info p {
+  padding: 0 0 0 60px;
+  margin-bottom: 0;
+  font-size: 14px;
+  color: #000000;
+  font-family: "Muli", sans-serif;
+}
+
+/*--------------------------------------------------------------
+# Contact Section
+--------------------------------------------------------------*/
+#contact{
+  padding-top: 1px;
+}
+
+.contact .req{
+  padding-top: 60px;
+}
+
+.contact .info-wrap {
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    background: #fff;
+  }
+  
+  .contact .info i {
+    font-size: 20px;
+    color: #ff6f36;
+    float: left;
+    width: 44px;
+    height: 44px;
+    background: #ffeee8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .contact .info h4 {
+    padding: 0 0 0 60px;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #2b2320;
+  }
+  
+  .contact .info p {
+    padding: 0 0 0 60px;
+    margin-bottom: 0;
+    font-size: 14px;
+    color: #65534c;
+  }
+  
+  .contact .info:hover i {
+    background: #ff6f36;
+    color: #fff;
+  }
+
+  .contact .php-email-form {
+    width: 100%;
+    box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.12);
+    padding: 30px;
+    background: #fff;
+  }
+  
+  .contact .php-email-form .form-group {
+    padding-bottom: 8px;
+  }
+  
+  .contact .php-email-form .validate {
+    display: none;
+    color: red;
+    margin: 0 0 15px 0;
+    font-weight: 400;
+    font-size: 13px;
+  }
+
+  .contact .php-email-form input, .contact .php-email-form textarea {
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 14px;
+  }
+  
+  .contact .php-email-form input {
+    height: 44px;
+  }
+  
+  .contact .php-email-form textarea {
+    padding: 10px 12px;
+  }
+  
+  .contact .php-email-form button[type="submit"] {
+    background: #ff6f36;
+    border: 0;
+    padding: 6px 18px;
+    color: #fff;
+    transition: 0.4s;
+    border-radius: 4px;
+  }
+  
+  .contact .php-email-form button[type="submit"]:hover {
+    background: #ffcdb9;
+    color: #ff5f1f;
+  }
+  
+
+  /*--------------------------------------------------------------
+# F.A.Q Section
+--------------------------------------------------------------*/
+#faq {
+    padding: 60px 0;
+  }
+  
+
+  #faq .section-header h2 {
+    font-family: "Raleway", sans-serif;
+    margin: 0 0 20px 0;
+    padding: 0;
+    color: #0e1b4d;
+    font-size: 36px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  #faq #faq-list {
+    padding: 0;
+    list-style: none;
+  }
+  
+  #faq #faq-list li {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  #faq #faq-list a {
+    color: #f03c02;
+    padding: 18px 0;
+    display: block;
+    position: relative;
+    font-family: "Raleway", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+    padding-right: 20px;
+  }
+  
+  #faq #faq-list i {
+    font-size: 24px;
+    position: absolute;
+    right: 0;
+    top: 16px;
+  }
+  
+  #faq #faq-list p {
+    margin-bottom: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    #faq #faq-list a {
+      font-size: 18px;
+    }
+    #faq #faq-list i {
+      top: 13px;
+    }
+  }
+  
+  
+  #faq #faq-list a.collapsed {
+    color: #000;
+  }
+  
+  #faq #faq-list a.collapsed i::before {
+    content: "\f055" !important;
+  }
+
+  /*--------------------------------------------------------------
+# About
+--------------------------------------------------------------*/
+.about .content h2 {
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 60px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-family: "Raleway", sans-serif;
+}
+
+.about .content h3 {
+  font-weight: 500;
+  line-height: 32px;
+  font-size: 24px;
+  font-family: "Raleway", sans-serif;
+}
+
+.about .content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.about .content ul li {
+  padding: 10px 0 0 28px;
+  position: relative;
+}
+
+.about .content ul i {
+  left: 0;
+  top: 7px;
+  position: absolute;
+  font-size: 20px;
+  color: #f03c02;
+}
+
+.about .content p:last-child {
+  margin-bottom: 0;
+}
+
+/*--------------------------------------------
+---------------------------------------------*/
+
+.radiotextsty {
+  color: #A5A4BF;
+  font-size: 14px;
+}
+
+.customradio {
+  display: block;
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 0px;
+  cursor: pointer;
+  font-size: 18px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.customradio input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  height: 13px;
+  width: 13px;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 50%;
+  border:2px solid #BEBEBE;
+}
+
+/* On mouse-over, add a grey background color */
+.customradio:hover input ~ .checkmark {
+  background-color: transparent;
+}
+
+/* When the radio button is checked, add a blue background */
+.customradio input:checked ~ .checkmark {
+  background-color: white;
+  border:1px solid #BEBEBE;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.customradio input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.customradio .checkmark:after {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #f03d02af;
+}
+
+/*-------------------------------------------
+--------------------------------------------*/
+/*--thank you pop starts here--*/
+.thank-you-pop{
+	width:100%;
+ 	padding:20px;
+	text-align:center;
+}
+.thank-you-pop img{
+	width:76px;
+	height:auto;
+	margin:0 auto;
+	display:block;
+	margin-bottom:25px;
+}
+
+.thank-you-pop h1{
+	font-size: 42px;
+    margin-bottom: 25px;
+	color:#5C5C5C;
+}
+.thank-you-pop p{
+	font-size: 20px;
+    margin-bottom: 27px;
+ 	color:#5C5C5C;
+}
+.thank-you-pop h3.cupon-pop{
+	font-size: 25px;
+    margin-bottom: 40px;
+	color:#222;
+	display:inline-block;
+	text-align:center;
+	padding:10px 20px;
+	border:2px dashed #222;
+	clear:both;
+	font-weight:normal;
+}
+.thank-you-pop h3.cupon-pop span{
+	color:#03A9F4;
+}
+.thank-you-pop a{
+	display: inline-block;
+    margin: 0 auto;
+    padding: 9px 20px;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+    background-color: #8BC34A;
+    border-radius: 17px;
+}
+.thank-you-pop a i{
+	margin-right:5px;
+	color:#fff;
+}
+#ignismyModal .modal-header{
+    border:0px;
+}
+#ignismyModal{
+  padding-top: 80px;
+}
+/*--thank you pop ends here--*/
+.transaction-success{
+  background-color: #2ed17f;
+  color: #ffffff;
+  border-radius: 1rem;
+  padding: 6px;
+  font-size: 13px;
+}
+
+.transaction-pending{
+  background-color: #f0985e;
+  color: #ffffff;
+  border-radius: 1rem;
+  padding: 6px;
+  font-size: 13px;
+}
+
+.transaction-failed{
+  background-color: #e07a7a;
+  color: #ffffff;
+  border-radius: 1rem;
+  padding: 6px;
+  font-size: 13px;
+}
+
+.transaction-incart{
+  background-color: #f8ea66;
+  border-radius: 1rem;
+  padding: 6px;
+  font-size: 13px;
+}
+
+.transaction-cancel{
+  background-color: #747171;
+  color: #ffffff;
+  border-radius: 1rem;
+  padding: 6px;
+  font-size: 13px;
+}

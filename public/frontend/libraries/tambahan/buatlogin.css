@@ -1,0 +1,145 @@
+
+
+/* Made with love by Mutiullah Samim*/
+
+html,body{
+    height: 100%;
+    
+}
+
+label{
+    margin-bottom: 3px;
+    color: white;
+    font-size: 12px;
+}
+
+.bg-image{
+    background-color: rgb(247, 247, 247);
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100%;
+    filter: blur(2.3px);
+    -webkit-filter: blur(2.3px);
+}
+
+.container-login{
+    top: 50%;
+    left: 50%;
+    align-content: center;
+    font-family: "Nunito", sans-serif;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    position: absolute;
+}
+
+.container-login img{
+    width: 150px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.card-login{
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    word-wrap: break-word;
+    margin-top: auto;
+    margin-bottom: auto;
+    min-width: 400px;
+    max-width: 460px;
+    background-color: rgba(0, 0, 0, 0.275) !important;
+}
+
+.social_icon span{
+    font-size: 60px;
+    margin-left: 10px;
+    color: #FFC312;
+}
+
+.social_icon span:hover{
+    color: white;
+    cursor: pointer;
+}
+
+.card-body h4{
+    color: rgb(189, 252, 186);
+}
+
+.card-body h7{
+    color: #ffffff96;
+}
+
+.social_icon{
+    position: absolute;
+    right: 20px;
+    top: -45px;
+}
+
+.input-group{
+    margin-top: 25px;
+}
+
+
+.input-group-prepend span{
+    width: 50px;
+    background-color: rgb(93, 174, 107);
+    color: white;
+    border:0 !important;
+}
+
+.form-control:focus{
+    color: #6e707e;
+    background-color: #fff;
+    border-color: #f8ac55;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(224, 136, 54, 0.438);
+
+}
+
+.remember{
+    color: white;
+}
+
+.remember input
+{
+    width: 20px;
+    height: 20px;
+    margin-left: 15px;
+    margin-right: 5px;
+}
+  
+form.user .form-control-user {
+    font-size: 0.8rem;
+    border-radius: 10rem;
+    padding: 1rem 1rem;
+}
+
+.login_btn{
+    color: rgb(255, 255, 255);
+    background-color: rgb(93, 174, 107);
+    min-width: 50%;
+    transition: all ease-in-out 0.4s;
+    font-size: 0.9rem;
+    border-radius: 10rem;
+    padding: 0.75rem 1rem;
+    margin-top: 20px;
+}
+
+.login_btn:hover{
+    color: rgb(104, 172, 101);
+    background-color: white;
+}
+
+.links{
+    color: white;
+}
+
+.links a{
+    margin-left: 4px;
+}
+
+.card-login .card-footer .btn-link{
+    color: rgb(141, 220, 137);
+}

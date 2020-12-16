@@ -1,0 +1,83 @@
+/* Tabs*/
+
+
+section .section-title {
+    text-align: center;
+    color: #007b5e;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+#tabs{
+    color: #000000;
+}
+
+#tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #f3f3f3;
+    background-color: #eeeeee;
+    border-color: transparent transparent #f3f3f3;
+    border-bottom: 4px solid !important;
+}
+
+#tabs .nav-tabs .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    color: #364983;
+}
+
+.tombol{
+    padding: 0 7px 0 ;
+}
+
+.tombol a{
+    margin-right: 20px;
+    word-wrap: break-word;
+}
+
+.tombol i{
+    margin-right: 8px;
+}
+
+.tombol p{
+    font-size: 16px;
+}
+
+.transaction-success{
+    background-color: #2ed17f;
+    color: #ffffff;
+    border-radius: 1rem;
+    padding: 6px;
+    font-size: 13px;
+}
+
+.transaction-pending{
+    background-color: #f08844;
+    color: #ffffff;
+    border-radius: 1rem;
+    padding: 6px;
+    font-size: 13px;
+}
+
+.transaction-failed{
+    background-color: #ee5353;
+    color: #ffffff;
+    border-radius: 1rem;
+    padding: 6px;
+    font-size: 13px;
+}
+
+.transaction-incart{
+    background-color: #ecda37;
+    border-radius: 1rem;
+    padding: 6px;
+    font-size: 13px;
+}
+
+.transaction-cancel{
+    background-color: #747171;
+    color: #ffffff;
+    border-radius: 1rem;
+    padding: 6px;
+    font-size: 13px;
+}
