@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<br><br>
+<br>
 <!------ Include the above in your HEAD tag ---------->
 <div class="container">
         @if ($errors->any())
@@ -24,8 +24,9 @@
               <?php
                   $parameter= Crypt::encrypt(Auth::user()->id);
               ?>
-              <a href="{{ route('profil', $parameter) }}" style="font-size: 14px;" class="list-group-item list-group-item-action">Profil</a>
+              <a href="{{ route('profil', $parameter) }}" style="font-size: 14px; color:rgb(67, 163, 62);" class="list-group-item list-group-item-action">Akun Saya</a>
               <a href="{{ route('pass', $parameter) }}" style="font-size: 14px;" class="list-group-item list-group-item-action">Ubah Password</a>
+              <a href="{{ route('pesanan-saya', $parameter) }}" style="font-size: 14px;" class="list-group-item list-group-item-action">Pesanan Saya</a>
           </div> 
 		</div>
 		<div class="col-md-10">
@@ -33,7 +34,7 @@
 		        <div class="card-body">
 		            <div class="row">
 		                <div class="col-md-12">
-		                    <h4>Profil Saya</h4>
+		                    <h4>Akun Saya</h4>
 		                    <hr>
 		                </div>
 		            </div>
@@ -44,6 +45,7 @@
                           @csrf
                           <div class="row">
                             <div class="col-md-9">
+
                               <div class="form-group row">
                                 <label for="name" class="col-4 col-form-label">Nama Lengkap *</label> 
                                 <div class="col-8">
@@ -76,7 +78,7 @@
                               </div>
 
                               <div class="form-group row">
-                                <label for="store_name" class="col-4 col-form-label">Nama Toko</label> 
+                                <label for="name" class="col-4 col-form-label">Nama Toko</label> 
                                 <div class="col-8">
                                   <input id="store_name" name="store_name" value="{{ $item->store_name }}" class="form-control @error('store_name') is-invalid @enderror" type="text">
                                   @error('store_name')
@@ -202,7 +204,7 @@
         
 	</div>
 </div>
-<br><br><br>
+
 @endsection
 
 @push('addon-script')

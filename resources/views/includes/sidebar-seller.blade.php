@@ -22,20 +22,35 @@
 
   <li class="nav-item {{ (request()->routeIs('product-seller')) || (request()->routeIs('product-seller-create')) ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('product-seller',$parameter) }}">
-      <i class="fas fa-fw fa-bell"></i>
-      <span>Produk</span></a>
+      <i class="fas fa-fw fa-box-open"></i>
+      <span>Product</span></a>
   </li>
 
   <li class="nav-item {{ (request()->routeIs('transaction-seller')) || (request()->routeIs('transaction-detail-seller')) ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('transaction-seller',$parameter) }}">
       <i class="fas fa-fw fa-dollar-sign"></i>
-      <span>Transaksi</span></a>
+      <span>Transaction</span></a>
   </li>
 
-  <li class="nav-item ">
-    <a class="nav-link" href="">
-      <i class="fas fa-fw fa-user"></i>
-      <span>Pengaturan</span></a>
+  <li class="nav-item {{ (request()->routeIs('affiliate')) || (request()->routeIs('list-affiliate')) || (request()->routeIs('my-product-aff')) || (request()->routeIs('affiliate-transaction')) || (request()->routeIs('afiliator')) 
+  || (request()->routeIs('affiliate-transaction')) || (request()->routeIs('owner')) || (request()->routeIs('bukti')) || (request()->routeIs('afiliator')) || (request()->routeIs('afiliator-trans')) || (request()->routeIs('pilih-affiliate')) ? 'active' : '' }}">
+  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+      <i class="fas fa-fw fa-link"></i>
+      <span>Affiliate</span></a>
+      <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item {{ (request()->routeIs('affiliate')) ? 'active' : '' }}" href="{{ route('affiliate', $parameter) }}">Dashboard</a>
+            <a class="collapse-item {{ (request()->routeIs('list-affiliate')) || (request()->routeIs('affiliate-transaction')) || (request()->routeIs('owner')) || (request()->routeIs('bukti')) ? 'active' : '' }}" href="{{ route('list-affiliate', $parameter) }}">Rekomendasi Saya</a>
+            <a class="collapse-item {{ (request()->routeIs('my-product-aff')) || (request()->routeIs('afiliator')) || (request()->routeIs('afiliator-trans'))  ? 'active' : '' }}" href="{{ route('my-product-aff', $parameter) }}">My Affiliate Product</a>
+            
+          </div>
+      </div>
+  </li>
+
+  <li class="nav-item {{ (request()->routeIs('setting'))  ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('setting',$parameter) }}">
+      <i class="fas fa-fw fa-store"></i>
+      <span>Setting</span></a>
   </li>
 
   <hr class="sidebar-divider">

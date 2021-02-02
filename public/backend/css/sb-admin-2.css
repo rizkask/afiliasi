@@ -5458,7 +5458,7 @@ a.close.disabled {
 
 .modal {
   position: fixed;
-  top: 0;
+  top: 25%;
   left: 0;
   z-index: 1050;
   display: none;
@@ -10421,15 +10421,15 @@ a:focus {
 }
 
 .sidebar-dark .nav-item .nav-link:active, .sidebar-dark .nav-item .nav-link:focus, .sidebar-dark .nav-item .nav-link:hover {
-  background-color: rgba(86, 140, 86, 0.398)
+  color: rgb(73, 73, 73);
 }
 
 .sidebar-dark .nav-item .nav-link:active i, .sidebar-dark .nav-item .nav-link:focus i, .sidebar-dark .nav-item .nav-link:hover i {
-  color: #fff;
+  color: rgb(73, 73, 73);
 }
 
 .sidebar-dark .nav-item .nav-link[data-toggle="collapse"]::after {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(0, 0, 0, 0.445);
 }
 
 .sidebar-dark .nav-item.active .nav-link {
@@ -10441,19 +10441,19 @@ a:focus {
 }
 
 .sidebar-dark #sidebarToggle {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgb(228, 228, 228);
 }
 
 .sidebar-dark #sidebarToggle::after {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgb(255, 255, 255);
 }
 
 .sidebar-dark #sidebarToggle:hover {
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgb(201, 201, 201);
 }
 
 .sidebar-dark.toggled #sidebarToggle::after {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgb(255, 255, 255);
 }
 
 .btn-circle {
@@ -11030,6 +11030,20 @@ body.sidebar-toggled footer.sticky-footer {
 .profile-user-img{
   overflow: hidden;
   position: relative;
+  padding: 5px;
+  cursor: default;
+}
+
+.profile-user-img .delete-gallery{
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.profile-user-img .delete-gallery img{
+  width: 20px;
+  height: 20px;
 }
 
 .profile-user-img > img.img-circle {
@@ -11052,4 +11066,113 @@ body.sidebar-toggled footer.sticky-footer {
 
 .profil-img{
   font-size: 12px;
+}
+
+/*-------------------------------------*/
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.toggle {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.toggle:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .toggle {
+  background-color: #2196F3;
+}
+
+input:focus + .toggle {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .toggle:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.toggle.round {
+  border-radius: 34px;
+}
+
+.toggle.round:before {
+  border-radius: 50%;
+}
+
+.tita{
+  overflow: hidden;
+  height: 105px;
+  width: 105px;
+  position: relative;
+  object-fit: cover;
+}
+
+.siti{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input[type='radio'][class='variasi'] { 
+  visibility: hidden;
+}
+
+input[type='radio'][class='variasi'] + label {
+    padding: 6px;
+    border: 1px solid #bababa;
+}
+
+
+input[type='radio'][class='variasi']:checked + label {
+    border: 1px solid rgb(243, 85, 0);
+    color: rgb(243, 85, 0);
+    padding: 6px;
+}
+
+.transaction-pending{
+  background-color: #ee7f17c1;
+  color: #ffffff;
+  border-radius: 1rem;
+  padding: 6px;
+  font-size: 11px;
+}
+
+.transaction-shipping{
+  background-color: #349614bb;
+  color: #ffffff;
+  border-radius: 1rem;
+  padding: 6px;
+  font-size: 11px;
 }

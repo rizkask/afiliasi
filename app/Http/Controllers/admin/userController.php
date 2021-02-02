@@ -17,7 +17,7 @@ class userController extends Controller
      */
     public function index()
     {
-        $item = user::get();
+        $item = user::orderBy('created_at','DESC')->get();
 
         return view('pages.admin.user.index',[
             'items' => $item

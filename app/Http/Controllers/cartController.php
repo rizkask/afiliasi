@@ -11,9 +11,9 @@ class cartController extends Controller
 {
     public function index()
     {
-        $cart = cart::with(['product.galleries','user'])->where('users_id', Auth::user()->id)->get();
+        $cart = cart::with(['product.galleries','user'])->where('users_id', Auth::user()->id)->get()->groupby('pemilik_id');
+        //dd($cart->keys()->get(0));
         $totalPrice = 0;
-
         return view('pages.cart',[
             'carts' => $cart,
             'totalPrice' => $totalPrice,

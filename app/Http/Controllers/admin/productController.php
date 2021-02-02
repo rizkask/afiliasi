@@ -20,7 +20,7 @@ class productController extends Controller
      */
     public function index()
     {
-        $item = product::with(['user','category'])->get();
+        $item = product::with(['user','category'])->orderBy('created_at','DESC')->get();
 
         return view('pages.admin.product.index',[
             'items' => $item

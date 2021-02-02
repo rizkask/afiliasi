@@ -17,24 +17,19 @@ class detailController extends Controller
                 ->where('slug', $slug)
                 ->firstOrFail();
         $transaksi = TransactionDetail::where('products_id', $item->id)->get();
-        $sold = count($transaksi);
+
+        $sell = product::where('users_id', $item->users_id)->get();
+
+        $sold=0;
+        foreach($sell as $q){
+            $sold += $q->sold;
+        }
+
         return view('pages.detail',[
             'product' => $item,
             'sold' => $sold,
         ]);
     }
 
-    public function add(Request $request, $id)
-    {
-        $cek = Crypt::decrypt($id);
-        $data = [
-            'products_id' => $cek,
-            'users_id' => Auth::user()->id,
-            'quantity' => $request->quantity,
-        ];
-
-        cart::create($data);
-
-        return redirect()->route('cart');
-    }
+    
 }

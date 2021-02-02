@@ -12,9 +12,6 @@
 				<form method="POST" action="{{ route('login') }}">
                     @csrf
 					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-user"></i></span>
-						</div>
 						<input  type="email" class="form-control @error('email') is-invalid @enderror" name="email" oninvalid="this.setCustomValidity('harap sertakan &quot@&quot di alamat email')" placeholder="email" value="{{ old('email') }}" autofocus>
 						@error('email')
                             <span class="invalid-feedback" role="alert">
@@ -23,9 +20,6 @@
                         @enderror
 					</div>
 					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-key"></i></span>
-						</div>
                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="kata sandi" autocomplete="current-password">
                         @error('password')
                             <span class="invalid-feedback" role="alert">

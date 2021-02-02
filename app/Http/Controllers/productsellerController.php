@@ -23,7 +23,7 @@ class productsellerController extends Controller
      */
     public function index()
     {
-        $item = product::with(['user','category'])->where('users_id',Auth::user()->id)->get();
+        $item = product::with(['user','category'])->where('users_id',Auth::user()->id)->orderBy('created_at','DESC')->get();
 
         return view('pages.seller.product',[
             'items' => $item
@@ -46,7 +46,7 @@ class productsellerController extends Controller
         $item = productgallery::findorFail($id);
         $item->delete();
 
-        return redirect()->route('product-seller-create', $request->products_id);
+        return redirect()->back();
     }
 
     public function create()
@@ -76,7 +76,7 @@ class productsellerController extends Controller
             'categories_id' => 'required|exists:categories,id',
             'price' => 'required|integer',
             'description' => 'required',
-            'image' => 'required|image',
+            'image' => 'required',
         ]);
 
         $product = product::create([
@@ -172,5 +172,27 @@ class productsellerController extends Controller
         $item->delete();
 
         return redirect()->route('product-seller',$parameter);
+    }
+
+    public function on_affiliate(Request $request, $id)
+    {
+        $product = product::findorFail($id);
+
+        $product->update([
+            'affiliate' => 1,
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function off_affiliate(Request $request, $id)
+    {
+        $product = product::findorFail($id);
+
+        $product->update([
+            'affiliate' => 0,
+        ]);
+
+        return redirect()->back();
     }
 }

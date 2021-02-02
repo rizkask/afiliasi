@@ -33,19 +33,18 @@
 
     <main id="main">
 
-        <hr width="82%">
-        <!-- ======= Services Section ======= -->
+        <!--<hr width="82%">
         <section id="services" class="services">
             <div class="container">
 
-            <div class="section-title" data-aos="fade-up">
+            <div class="section-title">
                 <h2>Categories</h2>
             </div>
 
             <div class="row space">
             @foreach($categories as $category)
                 <div class="col-lg-2 col-md-6">
-                <div class="icon-box" data-aos="fade-up">
+                <div class="icon-box">
                     <h4 class="title"><a href="">{{ $category->name }}</a></h4>
                 </div>
                 </div>
@@ -53,7 +52,7 @@
             </div>
 
             </div>
-        </section><!-- End Services Section -->
+        </section>-->
 
         <hr width="82%">
 
@@ -62,7 +61,7 @@
         <section id="hotels" class="section-with-bg wow fadeInUp">
 
             <div class="container">
-                <div class="section-title" data-aos="fade-up">
+                <div class="section-title">
                     <h2>Recommendation</h2>
                 </div>
 
@@ -75,8 +74,9 @@
                                     <img src="{{ url($product->galleries->count() ? Storage::url($product->galleries->first()->image) : '') }}" alt="...">
                                 </a>
                             </div>
-                            <a href="{{ route('detail', $product->slug) }}"><h3>{{ $product->name }}</h3></a>
+                            <a href="{{ route('detail', $product->slug) }}"><h3 class="truncate">{{ $product->name }}</h3></a>
                             <p><a href="{{ route('detail', $product->slug) }}">@currency($product->price)</a></p>
+                            <a href="{{ route('detail', $product->slug) }}"><h6>{{ $product->user->regency->name }}</h6></a>
                         </div>
                     </div>
                 @endforeach

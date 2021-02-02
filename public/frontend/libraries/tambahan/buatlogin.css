@@ -9,12 +9,11 @@ html,body{
 
 label{
     margin-bottom: 3px;
-    color: white;
     font-size: 12px;
 }
 
 .bg-image{
-    background-color: rgb(247, 247, 247);
+    background-color: rgb(238, 238, 238);
     background-size: cover;
     background-repeat: no-repeat;
     min-height: 100%;
@@ -49,7 +48,7 @@ label{
     margin-bottom: auto;
     min-width: 400px;
     max-width: 460px;
-    background-color: rgba(0, 0, 0, 0.275) !important;
+    background-color: rgb(255, 255, 255) !important;
 }
 
 .social_icon span{
@@ -64,7 +63,7 @@ label{
 }
 
 .card-body h4{
-    color: rgb(189, 252, 186);
+    color: rgb(67, 163, 62);
 }
 
 .card-body h7{
@@ -90,16 +89,16 @@ label{
 }
 
 .form-control:focus{
-    color: #6e707e;
+    color: #888888;
     background-color: #fff;
-    border-color: #f8ac55;
+    border-color: rgb(67, 163, 62);
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(224, 136, 54, 0.438);
+    box-shadow: 0 0 0 0.2rem rgba(67, 163, 62, 0);
 
 }
 
 .remember{
-    color: white;
+    color: rgb(84, 84, 84);
 }
 
 .remember input
@@ -110,30 +109,24 @@ label{
     margin-right: 5px;
 }
   
-form.user .form-control-user {
-    font-size: 0.8rem;
-    border-radius: 10rem;
-    padding: 1rem 1rem;
-}
 
 .login_btn{
     color: rgb(255, 255, 255);
-    background-color: rgb(93, 174, 107);
-    min-width: 50%;
+    background-color: rgb(67, 163, 62);
+    min-width: 100%;
     transition: all ease-in-out 0.4s;
     font-size: 0.9rem;
-    border-radius: 10rem;
     padding: 0.75rem 1rem;
     margin-top: 20px;
 }
 
 .login_btn:hover{
-    color: rgb(104, 172, 101);
-    background-color: white;
+    color: rgb(255, 255, 255);
+    background-color: rgba(67, 163, 62, 0.864);
 }
 
 .links{
-    color: white;
+    color: rgb(126, 126, 126);
 }
 
 .links a{
@@ -141,5 +134,5 @@ form.user .form-control-user {
 }
 
 .card-login .card-footer .btn-link{
-    color: rgb(141, 220, 137);
+    color:  rgb(67, 163, 62);
 }

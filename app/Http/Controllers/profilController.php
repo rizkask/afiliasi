@@ -21,6 +21,7 @@ class profilController extends Controller
             'item' => $item
         ]);
     }
+    
     public function update(Request $request, $id)
     {
         $data = Crypt::decrypt($id);
@@ -29,21 +30,19 @@ class profilController extends Controller
         ]);
 
         $item = User::findOrFail($data);
-        if($item->image){
+        if($request->image){
             $item->update([
                 'name' => $request->name,
-                'store_name' => $request->store_name,
-                'slug' => Str::slug($request->store_name),
                 'phone_number' => $request->phone_number,
+                'store_name' => $request->store_name,
+                'image' => $request->file('image')->store('assets/avatar','public'),
             ]);
         }
         else{
             $item->update([
                 'name' => $request->name,
-                'store_name' => $request->store_name,
-                'slug' => Str::slug($request->store_name),
                 'phone_number' => $request->phone_number,
-                'image' => $request->file('image')->store('assets/avatar','public'),
+                'store_name' => $request->store_name,
             ]);
         }
         
@@ -70,5 +69,15 @@ class profilController extends Controller
         ]);
 
         return redirect()->back()->with(['success' => 'Data berhasil diubah']);
+    }
+
+    public function prof($id)
+    {
+        $data = Crypt::decrypt($id);
+        $item = User::findOrFail($data);
+
+        return view('pages.profil',[
+            'item' => $item
+        ])->with(['success' => 'Lengkapi alamat']);
     }
 }

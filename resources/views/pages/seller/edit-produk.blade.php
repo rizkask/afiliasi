@@ -25,6 +25,32 @@
         @endif
         <div class="card shadow">
             <div class="card-body">
+            
+                <div class="row">
+                    @foreach($item->galleries as $gallery)
+                    <div class="text-center profil-img">
+                        <label for="cat_image" class="custom-file-upload">
+                            <div class="profile-user-img">
+                                <img class="img-circle" id="category-img-tag" src="{{ url(Storage::url($gallery->image)) }}" />
+                                <a href="{{ route('product-seller-gallery-delete',$gallery->id) }}" class="delete-gallery">
+                                    <img src="/assets/img/delete2.png" alt="">
+                                </a>
+                            </div>
+                        </label>
+                    </div>
+                    @endforeach
+                </div>
+                <form action="{{ route('product-seller-gallery-upload') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="products_id" value="{{ $item->id }}">
+                    <input style="display:none;" name="image" id="file" type="file" onchange="form.submit()"/>
+                    <button type="button" class="btn btn-primary" onclick="thisFileUpload()">
+                        Add Photo
+                    </button>
+                </form><br>
+
+                <hr>
+
                 <form action="{{ route('product-seller-update',$item->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                         
@@ -58,25 +84,7 @@
                         </button>
                 </form>
 
-                <div class="row">
-                    @foreach($item->galleries as $gallery)
-                    <div class="text-center profil-img">
-                        <label for="cat_image" class="custom-file-upload">
-                            <div class="profile-user-img">
-                                <img class="img-circle" id="category-img-tag" src="{{ url(Storage::url($gallery->image)) }}" />
-                            </div>
-                        </label>
-                    </div>
-                    @endforeach
-                </div>
-                <form action="{{ route('product-seller-gallery-upload') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" name="products_id" value="{{ $item->id }}">
-                    <input style="display:none;" name="image" id="file" type="file" onchange="form.submit()"/>
-                    <button type="button" class="btn btn-primary btn-block" onclick="thisFileUpload()">
-                        Add Photo
-                    </button>
-                </form>
+                
             </div>
         </div>
     </div>

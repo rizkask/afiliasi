@@ -20,7 +20,7 @@ class productgalleryController extends Controller
      */
     public function index()
     {
-        $item = productgallery::with(['product'])->get();
+        $item = productgallery::with(['product'])->orderBy('created_at','DESC')->get();
 
         return view('pages.admin.productgallery.index',[
             'items' => $item

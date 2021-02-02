@@ -228,6 +228,13 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'affiliate' => App\Models\affiliate::class,
+        'product' => App\Models\product::class,
+        'cart' => App\Models\cart::class,
+        'user' => App\Models\user::class,
+        'TransactionDetail' => App\Models\TransactionDetail::class,
+        'bukti' => App\Models\bukti::class,
+        'claim' => App\Models\claim::class,
 
     ],
 

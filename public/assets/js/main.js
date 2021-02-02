@@ -191,7 +191,7 @@
 
 //qty
 
-jQuery(document).ready(function(){
+/**jQuery(document).ready(function(){
   // This button will increment the value
   $('.qtyplus').click(function(e){
       // Stop acting like a button
@@ -226,4 +226,4 @@ jQuery(document).ready(function(){
           $('input[name='+fieldName+']').val(1);
       }
   });
-});
+});**/

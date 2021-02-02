@@ -10,7 +10,7 @@ class cart extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'products_id', 'users_id' 
+        'products_id', 'users_id','quantity','pemilik_id'
     ];
 
     protected $hidden = [

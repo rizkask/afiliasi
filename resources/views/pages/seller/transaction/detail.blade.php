@@ -90,6 +90,7 @@
                                     <option value="PENDING">Pending</option>
                                     <option value="SHIPPING">Shipping</option>
                                     <option value="SUCCESS">Success</option>
+                                    <option value="FAILED">Failed</option>
                                 </select>
                             </div>
                             

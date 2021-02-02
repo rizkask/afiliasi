@@ -180,8 +180,26 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
 }
 
+.nav-menu button {
+  display: block;
+  position: relative;
+  color: #65534c;
+  padding: 14px 0 15px 0;
+  transition: 0.3s;
+  font-size: 13px;
+  font-family: "Open Sans", sans-serif;
+  text-transform: uppercase;
+}
+
+.nav-menu button:hover, .nav-menu .active > button, .nav-menu li:hover > button {
+  color: rgb(67, 163, 62);
+  font-weight: bold;
+  text-decoration: none;
+}
+
 .nav-menu a:hover, .nav-menu .active > a, .nav-menu li:hover > a {
-  color: #f03c02;
+  color: rgb(67, 163, 62);
+  font-weight: bold;
   text-decoration: none;
 }
 
@@ -218,11 +236,31 @@ h1, h2, h3, h4, h5, h6 {
   color: #581601;
 }
 
+.nav-menu .drop-down ul button {
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: none;
+  color: #581601;
+}
+
 .nav-menu .drop-down ul a:hover, .nav-menu .drop-down ul .active > a, .nav-menu .drop-down ul li:hover > a {
-  color: #f03c02;
+  color: rgb(67, 163, 62);
+  font-weight: bold;
+}
+
+.nav-menu .drop-down ul button:hover, .nav-menu .drop-down ul .active > button, .nav-menu .drop-down ul li:hover > button {
+  color: rgb(67, 163, 62);
+  font-weight: bold;
 }
 
 .nav-menu .drop-down > a:after {
+  content: "\ea99";
+  font-family: IcoFont;
+  padding-left: 5px;
+}
+
+.nav-menu .drop-down > button:after {
   content: "\ea99";
   font-family: IcoFont;
   padding-left: 5px;
@@ -243,7 +281,18 @@ h1, h2, h3, h4, h5, h6 {
   padding-right: 35px;
 }
 
+.nav-menu .drop-down .drop-down > button {
+  padding-right: 35px;
+}
+
 .nav-menu .drop-down .drop-down > a:after {
+  content: "\eaa0";
+  font-family: IcoFont;
+  position: absolute;
+  right: 15px;
+}
+
+.nav-menu .drop-down .drop-down > button:after {
   content: "\eaa0";
   font-family: IcoFont;
   position: absolute;
@@ -315,7 +364,23 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 14px;
 }
 
+.mobile-nav button {
+  display: block;
+  position: relative;
+  color: #2b2320;
+  padding: 10px 20px;
+  font-weight: 500;
+  outline: none;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
 .mobile-nav a:hover, .mobile-nav .active > a, .mobile-nav li:hover > a {
+  color: #f03c02;
+  text-decoration: none;
+}
+
+.mobile-nav button:hover, .mobile-nav .active > button, .mobile-nav li:hover > button {
   color: #f03c02;
   text-decoration: none;
 }
@@ -328,11 +393,27 @@ h1, h2, h3, h4, h5, h6 {
   right: 15px;
 }
 
+.mobile-nav .drop-down > button:after {
+  content: "\ea99";
+  font-family: IcoFont;
+  padding-left: 10px;
+  position: absolute;
+  right: 15px;
+}
+
 .mobile-nav .active.drop-down > a:after {
   content: "\eaa1";
 }
 
+.mobile-nav .active.drop-down > button:after {
+  content: "\eaa1";
+}
+
 .mobile-nav .drop-down > a {
+  padding-right: 35px;
+}
+
+.mobile-nav .drop-down > button {
   padding-right: 35px;
 }
 
@@ -376,7 +457,7 @@ h1, h2, h3, h4, h5, h6 {
 --------------------------------------------------------------*/
 #hero {
   margin: 0 120px 0 120px;
-  height: 60vh;
+  height: 50vh;
   overflow: hidden;
   position: relative;
   padding: 0;
@@ -720,7 +801,7 @@ section {
 }
 
 #hotels .section-title{
-  margin-bottom: -35px;
+  margin-bottom: -55px;
 }
 
 #hotels .container{
@@ -740,7 +821,7 @@ section {
   width: 200px;
   border: 1px solid #e0e5fa;
   background: #fff;
-  margin-bottom: 30px;
+  margin-bottom: 0;
 }
 
 #hotels .cek {
@@ -773,6 +854,13 @@ section {
   color: #000;
 }
 
+#hotels .cek h6 {
+  padding: 0 14px;
+  margin-bottom: 14px;
+  color: #888888;
+  font-size: 13px;
+}
+
 #hotels .stars {
   padding: 0 14px;
   margin-bottom: 5px;
@@ -789,12 +877,21 @@ section {
   font-size: 13px;
 }
 
+#navbar-example .card-details .empty{
+  text-align: center;
+  margin: 30px 0 30px 0;
+}
+
+#toko{
+  margin-left: 21px;
+  margin-bottom: 30px;
+}
+
 #toko .hotel {
   width: 200px;
   border: 1px solid #e0e5fa;
   background: #fff;
-  margin-bottom: 30px;
-  margin-left: 16px;
+  margin: 30px 16px 0 0;
 }
 
 #toko .hotel:hover .hotel-img img {
@@ -1035,7 +1132,7 @@ section {
 }
 
 .about-us .card-details .bates button{
-  background-color: #62805e;
+  background-color: rgb(67, 163, 62);
   color: #ffffff;
 }
 
@@ -1226,7 +1323,7 @@ section {
 
 
 .about-us .trip-informations input[type='radio'][name='button-checkbox']:checked + label {
-    border: 1px solid #000;
+    border: 1px solid rgb(0, 0, 0);
     padding: 4px;
 }
 
@@ -2531,7 +2628,7 @@ section {
   text-decoration: none;
 }
 
-.shopping-cart-wrap tr{
+.tengah tr{
   vertical-align: middle;
   text-align: center;
 }
@@ -2560,8 +2657,6 @@ section {
   margin-bottom: 15px;
   overflow: hidden;
   position: relative;
-  
-  
 }
 
 .profile-user-img > img.img-circle {
@@ -2610,3 +2705,206 @@ section {
   height: 80px;
   width: 80px;
 }
+
+/* Portfolio Section
+--------------------------------*/
+
+#hotels #portfolio-flters {
+  padding: 0;
+  margin: 5px 0 0 0;
+  list-style: none;
+  text-align: center;
+}
+
+#hotels #portfolio-flters li {
+  cursor: pointer;
+  margin: 15px 15px 15px 0;
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 12px;
+  line-height: 20px;
+  color: #666666;
+  border-radius: 4px;
+  text-transform: uppercase;
+  background: #fff;
+  margin-bottom: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+#hotels #portfolio-flters li:hover,
+#hotels #portfolio-flters li.filter-active {
+  border: 1px solid #ff571b;
+  color: #000000;
+}
+
+#hotels #portfolio-flters li:last-child {
+  margin-right: 0;
+}
+
+#hotels .portfolio-wrap {
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);
+  transition: 0.3s;
+}
+
+#hotels .portfolio-wrap:hover {
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.16);
+}
+
+#hotels .portfolio-item {
+  position: relative;
+  height: 360px;
+  overflow: hidden;
+}
+
+#hotels .portfolio-item figure {
+  background: #000;
+  overflow: hidden;
+  height: 240px;
+  position: relative;
+  border-radius: 4px 4px 0 0;
+  margin: 0;
+}
+
+#hotels .portfolio-item figure:hover img {
+  opacity: 0.4;
+  transition: 0.3s;
+}
+
+#hotels .portfolio-item figure .link-preview,
+#hotels .portfolio-item figure .link-details {
+  position: absolute;
+  display: inline-block;
+  opacity: 0;
+  line-height: 1;
+  text-align: center;
+  width: 36px;
+  height: 36px;
+  background: #fff;
+  border-radius: 50%;
+  transition: 0.2s linear;
+}
+
+#hotels .portfolio-item figure .link-preview i,
+#hotels .portfolio-item figure .link-details i {
+  padding-top: 6px;
+  font-size: 22px;
+  color: #333;
+}
+
+#hotels .portfolio-item figure .link-preview:hover,
+#hotels .portfolio-item figure .link-details:hover {
+  background: #ff571b;
+}
+
+#hotels .portfolio-item figure .link-preview:hover i,
+#hotels .portfolio-item figure .link-details:hover i {
+  color: #fff;
+}
+
+#hotels .portfolio-item figure .link-preview {
+  left: calc(50% - 38px);
+  top: calc(50% - 18px);
+}
+
+#hotels .portfolio-item figure .link-details {
+  right: calc(50% - 38px);
+  top: calc(50% - 18px);
+}
+
+#hotels .portfolio-item figure:hover .link-preview {
+  opacity: 1;
+  left: calc(50% - 44px);
+}
+
+#hotels .portfolio-item figure:hover .link-details {
+  opacity: 1;
+  right: calc(50% - 44px);
+}
+
+#hotels .portfolio-item .portfolio-info {
+  background: #fff;
+  text-align: center;
+  padding: 30px;
+  height: 90px;
+  border-radius: 0 0 3px 3px;
+}
+
+#hotels .portfolio-item .portfolio-info h4 {
+  font-size: 18px;
+  line-height: 1px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  padding-bottom: 0;
+}
+
+#hotels .portfolio-item .portfolio-info h4 a {
+  color: #333;
+}
+
+#hotels .portfolio-item .portfolio-info h4 a:hover {
+  color: #18d26e;
+}
+
+#hotels .portfolio-item .portfolio-info p {
+  padding: 0;
+  margin: 0;
+  color: #b8b8b8;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.belilagi{
+  border: 1px solid rgb(67, 163, 62);
+  background-color: rgb(67, 163, 62);
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  padding: 7px;
+  border-radius: 5%;
+}
+
+.belilagi:hover{
+  border: 1px solid rgb(67, 163, 62);
+  background-color: rgb(57, 146, 52);
+  color: rgb(255, 255, 255);
+  padding: 7px;
+  border-radius: 5%;
+}
+
+.variasi{
+  border: 1px solid rgb(148, 148, 148);
+  padding: 7px;
+  color:rgb(67, 163, 62);
+  border-radius: 5%;
+}
+
+.variasi:hover{
+  border: 1px solid rgb(67, 163, 62);
+  color: rgb(67, 163, 62);
+  padding: 7px;
+  border-radius: 5%;
+}
+
+.harga{
+  font-size: 20px;
+  color: rgb(67, 163, 62);
+}
+
+
+.bs-wizard {border-bottom: solid 1px #e0e0e0; padding: 30px 0 30px 0;}
+.bs-wizard > .bs-wizard-step {padding: 0; position: relative;}
+.bs-wizard > .bs-wizard-step .bs-wizard-stepnum {color: #595959; font-size: 16px; margin-bottom: 5px;}
+.bs-wizard > .bs-wizard-step .bs-wizard-info {color: #999; font-size: 14px;}
+.bs-wizard > .bs-wizard-step > .bs-wizard-dot {position: absolute; width: 50px; height: 50px; display: block; background: #c2edc9; top: 45px; left: 45%; margin-top: -15px; margin-left: -15px; border-radius: 50%;} 
+.bs-wizard > .bs-wizard-step > .bs-wizard-dot:after {content: ' '; width: 34px; height: 34px; background: #9bc5a2; border-radius: 50px; position: absolute; top: 8px; left: 8px; } 
+.bs-wizard > .bs-wizard-step > .progress {position: relative; border-radius: 0px; height: 8px; box-shadow: none; margin: 30px 0;}
+.bs-wizard > .bs-wizard-step > .progress > .progress-bar {width:0px; box-shadow: none; background: #c2edc9;}
+.bs-wizard > .bs-wizard-step.complete > .progress > .progress-bar {width:100%;}
+.bs-wizard > .bs-wizard-step.active > .progress > .progress-bar {width:100%;}
+.bs-wizard > .bs-wizard-step:first-child.active > .progress > .progress-bar {width:0%;}
+.bs-wizard > .bs-wizard-step:last-child.active > .progress > .progress-bar {width: 100%;}
+.bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot {background-color: #f5f5f5;}
+.bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot:after {opacity: 0;}
+.bs-wizard > .bs-wizard-step:first-child  > .progress {left: 50%; width: 50%;}
+.bs-wizard > .bs-wizard-step:last-child  > .progress {width: 50%;}
+.bs-wizard > .bs-wizard-step.disabled a.bs-wizard-dot{ pointer-events: none; }

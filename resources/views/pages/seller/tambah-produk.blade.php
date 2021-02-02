@@ -33,7 +33,7 @@
                                     <div class="profile-user-img">
                                         <img class="img-circle" id="category-img-tag" src="{{ url('assets/img/add-image2.png') }}" />
                                     </div>
-                                    <input name="image" id="cat_image" type="file" multiple/>
+                                    <input name="image" id="cat_image" type="file"/>
                                 </label>
                             </div>
                         </div>

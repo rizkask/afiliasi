@@ -11,9 +11,9 @@
 
     <div class="tombol d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">All Products</h1>
-    <?php
-        $parameter= Crypt::encrypt(Auth::user()->id);
-    ?>
+        <?php
+            $parameter= Crypt::encrypt(Auth::user()->id);
+        ?>
         <a href="{{ route('product-seller-create',$parameter) }}" class="btn btn-sm btn-primary shadow-sm">
             <i class="fas fa-plus fa-sm text-white-50"></i>Tambah Produk
         </a>

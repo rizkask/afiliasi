@@ -17,7 +17,7 @@ class categoryController extends Controller
      */
     public function index()
     {
-        $item = category::get();
+        $item = category::orderBy('created_at','DESC')->get();
 
         return view('pages.admin.category.index',[
             'items' => $item

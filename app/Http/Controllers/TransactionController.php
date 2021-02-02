@@ -18,22 +18,31 @@ class TransactionController extends Controller
         $sell = TransactionDetail::with(['transaction.user','product.galleries'])
                     ->whereHas('product', function($product){
                         $product->where('users_id',Auth::user()->id);
-                    })->get();
-
-        $buy = TransactionDetail::with(['transaction.user','product.galleries'])
-                    ->whereHas('transaction', function($transaction){
-                        $transaction->where('users_id',Auth::user()->id);
-                    })->get();
+                    })->orderBy('created_at','DESC')->get();
 
         //dd($sell[1]->transactions_id);
     
         $items = Transaction::with(['user','details'])
                     ->get();
 
-        return view('pages.seller.transaction.index',[
+        return view('pages.seller.transaction.sell',[
             'items' => $items,
             'sells' => $sell,
-            'buy' => $buy,
+        ]);
+    }
+
+    public function buy()
+    {
+
+        $buy = TransactionDetail::with(['transaction.user','product.galleries'])
+                    ->whereHas('transaction', function($transaction){
+                        $transaction->where('users_id',Auth::user()->id);
+                    })->orderBy('created_at','DESC')->get();
+
+        //dd($sell[1]->transactions_id);
+
+        return view('pages.seller.transaction.buy',[
+            'buys' => $buy,
         ]);
     }
 

@@ -5,21 +5,22 @@
 @endsection
 
 @section('content')
-<br><br>
+<br>
 <!------ Include the above in your HEAD tag ---------->
 <div class="container">
 	<div class="row">
           
-		<div class="col-md-3 ">
+		<div class="col-md-2 ">
 		      <div class="list-group ">
               <?php
                   $parameter= Crypt::encrypt(Auth::user()->id);
               ?>
-              <a href="{{ route('profil', $parameter) }}" class="list-group-item list-group-item-action">Profil</a>
-              <a href="{{ route('pass', $parameter) }}" class="list-group-item list-group-item-action">Ubah Password</a>
+              <a href="{{ route('profil', $parameter) }}" style="font-size: 14px;" class="list-group-item list-group-item-action">Akun Saya</a>
+              <a href="{{ route('pass', $parameter) }}" style="font-size: 14px; color:rgb(67, 163, 62);" class="list-group-item list-group-item-action">Ubah Password</a>
+              <a href="{{ route('pesanan-saya', $parameter) }}" style="font-size: 14px;" class="list-group-item list-group-item-action">Pesanan Saya</a>
           </div> 
 		</div>
-		<div class="col-md-9">
+		<div class="col-md-10">
         <div class="card fade show"  id="password" >
 		        <div class="card-body">
 		            <div class="row">
@@ -70,7 +71,7 @@
                               </div> 
                               <div class="form-group row">
                                 <div class="offset-4 col-8">
-                                  <button name="submit" type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                  <button name="submit" type="submit" class="btn" style="background-color:rgb(67, 163, 62);color:rgb(255, 255, 255);">Simpan Perubahan</button>
                                 </div>
                               </div>
                           </form>
@@ -82,5 +83,5 @@
         
 	</div>
 </div>
-<br><br><br>
+
 @endsection

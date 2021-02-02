@@ -138,26 +138,30 @@
         });    
     </script>
     <script>
-        $('#select-all').click(function(event) {   
-            var total = 0;
-            for(var i=0;i<input.length;i++){               
-                total += ($(".my-activity")[i]).val();
-                return total;
-            }
-            if(this.checked) {
-                // Iterate each checkbox
-                $(':checkbox').each(function() {
-                    this.checked = true;
-                    $('#amount').val(total);                        
+        $(document).ready(function() {
+            (function() {
+                var showChar = 22;
+                var ellipsestext = " ...";
+
+                $(".truncate").each(function() {
+                    var content = $(this).html();
+                    if (content.length > showChar) {
+                        var c = content.substr(0, showChar);
+                        var h = content;
+                        var html =
+                        c +
+                        '<span class="moreellipses">' +
+                        ellipsestext;
+
+                        $(this).html(html);
+                    }
                 });
-            } else {
-                $(':checkbox').each(function() {
-                    this.checked = false;
-                    $('#amount').val('');                       
-                });
-            }
-            
+                /* end iffe */
+            })();
+
+        /* end ready */
         });
+
     </script>
 </body>
 

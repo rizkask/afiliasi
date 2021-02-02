@@ -14,7 +14,7 @@ class sliderController extends Controller
     public function index()
     
     {
-        $items = slider::get();
+        $items = slider::orderBy('created_at','DESC')->get();
 
         return view('pages.admin.slider.index',[
             'items' => $items,
