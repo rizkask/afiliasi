@@ -8,7 +8,7 @@ use App\Models\slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class sliderController extends Controller
+class SliderController extends Controller
 {
     
     public function index()

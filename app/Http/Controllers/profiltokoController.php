@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
-class profiltokoController extends Controller
+class ProfiltokoController extends Controller
 {
     public function index($slug)
     {

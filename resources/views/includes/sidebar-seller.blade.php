@@ -39,8 +39,8 @@
       <span>Affiliate</span></a>
       <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item {{ (request()->routeIs('affiliate')) ? 'active' : '' }}" href="{{ route('affiliate', $parameter) }}">Dashboard</a>
-            <a class="collapse-item {{ (request()->routeIs('list-affiliate')) || (request()->routeIs('affiliate-transaction')) || (request()->routeIs('owner')) || (request()->routeIs('bukti')) ? 'active' : '' }}" href="{{ route('list-affiliate', $parameter) }}">Rekomendasi Saya</a>
+            <a class="collapse-item {{ (request()->routeIs('list-affiliate')) || (request()->routeIs('affiliate-transaction'))  ? 'active' : '' }}" href="{{ route('list-affiliate', $parameter) }}">Rekomendasi Saya</a>
+            <a class="collapse-item {{ (request()->routeIs('owner')) || (request()->routeIs('bukti')) ? 'active' : '' }}" href="{{ route('owner', $parameter) }}">Pengajuan Komisi</a>
             <a class="collapse-item {{ (request()->routeIs('my-product-aff')) || (request()->routeIs('afiliator')) || (request()->routeIs('afiliator-trans'))  ? 'active' : '' }}" href="{{ route('my-product-aff', $parameter) }}">My Affiliate Product</a>
             
           </div>

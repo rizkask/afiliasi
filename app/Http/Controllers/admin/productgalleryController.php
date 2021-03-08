@@ -11,7 +11,7 @@ use App\Models\product;
 use App\Models\category;
 use Yajra\DataTables\Facades\DataTables;
 
-class productgalleryController extends Controller
+class ProductgalleryController extends Controller
 {
     /**
      * Display a listing of the resource.

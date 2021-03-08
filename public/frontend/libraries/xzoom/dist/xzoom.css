@@ -50,12 +50,6 @@
   overflow: hidden;
 }
 
-/* Preview */
-.xzoom-preview {
-  border: 1px solid #888;
-  background: #2f4f4f;
-  box-shadow: -0px -0px 10px rgba(0,0,0,0.50);
-}
 
 /* Lens */
 .xzoom-lens {

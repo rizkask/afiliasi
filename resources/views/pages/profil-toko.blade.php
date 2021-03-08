@@ -14,13 +14,17 @@
                     <div class="card-body">
                         <div class="profile-header-container pull-left mr-4">   
                             <div class="profile-header-img">
+                                @if($item->image)
+                                <img class="img-circle" src="{{ url(Storage::url($item->image)) }}" />
+                                @else
                                 <img class="img-circle" src="{{ url('assets/img/store-default.png') }}" />
+                                @endif
                             </div>
                         </div> 
                         <div class="row" >
                             <div class="col-sm">
                                 <h3>{{ $item->store_name }}</h3>
-                                <h6>{{ $item->regency->name }}</h6>
+                                <h6><i class="fas fa-map-marker-alt"></i> {{ $item->regency->name }}</h6>
                             </div>
                             <div class="vl"></div>
                             <div class="col-sm info-profil">
@@ -46,9 +50,7 @@
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#atribut" role="tab">Rekomendasi</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#plan" role="tab">Rencana Perjalanan</a>
-                </li>
+                
             </ul>
 
             <!-- Tab panes {Fade}  -->
@@ -87,11 +89,6 @@
                                 </div>
                             @endforeach
                         </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="plan" role="tabpanel">
-                    <div class="card card-details" >
-                        <p class="empty">kosong</p>
                     </div>
                 </div>
             </div>

@@ -11,7 +11,7 @@ use App\Models\user;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
-class sellerController extends Controller
+class SellerController extends Controller
 {
     public function index(Request $request)
     {

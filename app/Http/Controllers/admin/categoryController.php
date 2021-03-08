@@ -8,7 +8,7 @@ use App\Http\Requests\admin\categoryRequest;
 use Illuminate\Support\Str;
 use App\Models\category;
 
-class categoryController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.

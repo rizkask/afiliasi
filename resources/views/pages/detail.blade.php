@@ -4,13 +4,34 @@
 @section('content')
 <main id="main">
 
-    <section id="about-us" class="about-us">
+    <section id="about-us" class="about-us ">
         <div class="container">
-            <div class="row no-gutters">
-                <div class="image col-xl-5">
-                    <img src="{{ url($product->galleries->count() ? Storage::url($product->galleries->first()->image) : '') }}" alt="...">
+            <div class="row">
+                <div class="col-md-5 pl-lg-0">
+                    <div class="gallery">
+                        <div class="xzoom-container image">
+                            <img
+                                src="{{ Storage::url($product->galleries->first()->image) }}"
+                                class="xzoom"
+                                id="xzoom-default"
+                                xoriginal="{{ Storage::url($product->galleries->first()->image) }}"
+                            />
+                        </div>
+                        <div class="xzoom-thumbs">
+                            @foreach($product->galleries as $gallery)
+                                <a href="{{ Storage::url($gallery->image) }}">
+                                    <img
+                                        src="{{ Storage::url($gallery->image) }}"
+                                        class="xzoom-gallery"
+                                        width="80" height="80" style="object-fit: cover;"
+                                        xpreview="{{ Storage::url($gallery->image) }}"
+                                    />
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
-                <div class="col-xl-7 pl-0 pl-lg-5 pr-lg-1 align-items-stretch">
+                <div class="col-md-7 pl-0 pl-lg-5 pr-lg-1 align-items-stretch">
                     <div class="content flex-column justify-content-center">
                         <div class="row">
                             <div class="col-md-12 icon-box">
@@ -27,9 +48,15 @@
                                         <table class="trip-informations">
                                             <input type='hidden' name="pemilik_id" value="{{ $product->users_id }}"/>
                                             <tr>
+                                                <th>Kategori</th>
+                                                <td>
+                                                    {{ $product->category->name }}
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <th>Harga</th>
                                                 <td>
-                                                    {{ $product->price }}
+                                                    @currency($product->price)
                                                 </td>
                                             </tr>
                                             <tr>
@@ -41,7 +68,7 @@
                                             <tr>
                                                 <th>Jumlah</th>
                                                 <td>
-                                                    <input type='button' value="-" class='qtyminus' field='quantity' onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty > 0 ) result.value--;return false;"/>
+                                                    <input type='button' value="-" class='qtyminus' field='quantity' onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty > 1 ) result.value--;return false;"/>
                                                     <input type='text' id="qty" name='quantity' value='1' class='qty' />
                                                     <input type='button' value="+" class='qtyplus' field='quantity'onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;"/>
                                                 </td>
@@ -127,24 +154,29 @@
             <div class="col-md-12">
                 <div class="card head-toko fade show">
                     <div class="card-body">
-                        <div class="profile-header-container pull-left mr-4">   
+
+                        <div class="profile-header-container pull-left mr-3">   
                             <div class="profile-header-img">
+                                @if($product->user->image)
+                                <img class="img-circle" src="{{ url(Storage::url($product->user->image)) }}" />
+                                @else
                                 <img class="img-circle" src="{{ url('assets/img/store-default.png') }}" />
+                                @endif
                             </div>
                         </div> 
                         <div class="row">
-                            <div class="col-sm">
+                            <div class="col-sm info-profil-satu">
                                 <h4>{{ $product->user->store_name }}</h4>
                                 <p>{{ $product->user->regency->name }}</p>
-                                <a href="{{ route('profil-toko', $product->user->slug) }}"><h6>Kunjungi Toko</h6></a>
+                                <h6><a href="{{ route('profil-toko', $product->user->slug) }}"><i class="fas fa-fw fa-store"></i>   Kunjungi Toko</a></h6>
                             </div>
                             <div class="vl"></div>
                             <div class="col-sm info-profil">
                             <?php
                                 $sum=product::where('users_id',$product->user->id)->count();
                             ?>
-                                <h6>Produk: {{ $sum }}</h6>
-                                <h6>Produk Terjual: {{ $sold }}</h6>
+                                <h6><span>Produk:</span> {{ $sum }}</h6>
+                                <h6><span>Produk Terjual:</span> {{ $sold }}</h6>
                             </div>
                         </div>
                     </div>
@@ -157,9 +189,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card head-toko fade show" >
-                    <div class="card-body">
+                    <div class="card-body bawah">
                         <div>
-                            <h5>Deskripsi</h5>
+                            <h5>Deskripsi Produk</h5>
                             <p>{!! $product->description !!}</p>
                         </div>
                     </div>
@@ -170,3 +202,20 @@
 
 </main>
 @endsection
+
+@push('prepend-style')
+    <link rel="stylesheet" href="{{ url('frontend/libraries/xzoom/dist/xzoom.css') }}" />
+@endpush
+
+@push('addon-script')
+    <script src="{{ url('frontend/libraries/xzoom/dist/xzoom.min.js') }}"></script>
+    <script>
+      $(document).ready(function() {
+        $('.xzoom, .xzoom-gallery').xzoom({
+          title: false,
+          tint: '#333',
+          Xoffset: 15
+        });
+      });
+    </script>
+@endpush

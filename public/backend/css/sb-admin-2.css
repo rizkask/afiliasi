@@ -10997,28 +10997,9 @@ body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
 
-.profile-header-container{
-  margin: 0 auto;
-}
 
-.profile-header-img {
-  margin-left: 30px;
-}
 
-.profile-header-img > img.img-product {
-  width: 95px;
-  height: 95px;
-  border: 2px solid #cecece;
-  object-fit: cover;
-}
 
-.head-toko{
-  margin-bottom: 30px;
-}
-
-.head-toko h5,h3{
-  margin-top: 20px;
-}
 
 
 .vl {
@@ -11175,4 +11156,66 @@ input[type='radio'][class='variasi']:checked + label {
   border-radius: 1rem;
   padding: 6px;
   font-size: 11px;
+}
+
+.head-toko{
+  margin-bottom: 20px;
+}
+
+.head-toko a{
+  border: 1px solid rgb(148, 148, 148);
+  padding: 7px;
+  color:rgb(67, 163, 62);
+  border-radius: 5%;
+  font-size: 13px;
+}
+
+.head-toko a:hover{
+  border: 1px solid rgb(67, 163, 62);
+  color: rgb(67, 163, 62);
+  padding: 7px;
+  border-radius: 5%;
+}
+
+.head-toko span{
+  color:rgb(0, 0, 0);
+  font-size: 20px;
+}
+
+
+
+.head-toko .bawah p{
+  margin-left: 25px;
+}
+
+.head-toko .info-profil{
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 30px;
+}
+
+.head-toko .ajukan{
+  text-align: end;
+}
+
+.profile-header-container{
+  margin: 0 auto;
+}
+
+.profile-header-img {
+  margin-left: 30px;
+}
+
+.profile-header-img > img.img-circle {
+  width: 80px;
+  height: 80px;
+  border: 2px solid #cecece;
+  border-radius: 50%;
+}
+
+.profile-header-img > img.img-product {
+  width: 95px;
+  height: 95px;
+  border: 2px solid #cecece;
+  object-fit: cover;
 }

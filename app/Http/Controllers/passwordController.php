@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Hash;
 
-class passwordController extends Controller
+class PasswordController extends Controller
 {
     public function index($id)
     {

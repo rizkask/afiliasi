@@ -1,7 +1,7 @@
 @extends('layouts.seller')
 
 @section('title')
-    Seller Dashboard
+    Afiliasi
 @endsection
 
 @section('content')
@@ -14,18 +14,12 @@
         <h1 class="h3 mb-0 text-gray-800">Transaksi</h1>
       </div>
 
-
       <?php
           $parameter= Crypt::encrypt(Auth::user()->id);
       ?>
+    
 
       <div class="card show mb-4">
-          <nav>
-              <div class="nav nav-tabs nav-fill" id="nav-tab">
-                  <a class="nav-item nav-link" style="color: rgb(141, 141, 141);" href="{{ route('list-affiliate', $parameter) }}">Produk Rekomendasi Saya</a>
-                  <a class="nav-item nav-link active" style="color: rgb(141, 141, 141);"  href="{{ route('bukti', $parameter) }}">Transaksi</a>
-              </div>
-          </nav>
           <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

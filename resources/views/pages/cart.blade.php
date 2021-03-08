@@ -9,28 +9,51 @@
 <div class="container">
 	<div class="row">
 
+    @if($carts->count() > 0)
         <div class="col-md-9">
+            <div class="card show mb-4">
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover shopping-cart-wrap" id="dataTable" width="100%" cellspacing="0">
-                            <thead class="text-muted">
-                                <tr>
-                                    <!--<th scope="col">
-                                        <label>
-                                            <input type="checkbox" name="select-all" id="select-all" />
-                                        </label>
-                                    </th>-->
-                                    <th scope="col">Produk</th>
-                                    <th scope="col">Harga Satuan</th>
-                                    <th scope="col">Kuantitas</th>
-                                    <th scope="col">Total Harga</th>
-                                    <th scope="col">Aksi</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
+                    <table class="table-hover shopping-cart-wrap" style=" border:none;" width="100%" cellspacing="0" cellpadding="0">
+                        <thead class="text-muted" style="background-color: #fff;">
+                            <tr style="font-size:14px;">
+                                <!--<th scope="col">
+                                    <label>
+                                        <input type="checkbox" name="select-all" id="select-all" />
+                                    </label>
+                                </th>-->
+                                <th style="width:43%;">Produk</th>
+                                <th class="text-center" style="width:20%;">Harga Satuan</th>
+                                <th class="text-center" style="width:8%;">Kuantitas</th>
+                                <th class="text-center" style="width:21%;">Total Harga</th>
+                                <th class="text-center" style="width:8%;">Aksi</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
+            </div>
         </div>
+        <div class="col-md-3">
+            <div class="card show mb-4">
+                <div class="card-body">
+                    <table class="table-hover shopping-cart-wrap" style=" border:none;" width="100%" cellspacing="0" cellpadding="0">
+                        <thead class="text-muted" style="background-color: #fff;">
+                            <tr style="font-size:14px;">
+                                <th class="text-center">Checkout</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    @else
+        <div class="container">
+            <div class="text-center cart-kosong col-md-12">
+                <h6 style="color: rgb(156, 156, 156); margin-bottom:20px;">Keranjang belanja Anda kosong</h6>
+                <a href="{{ route('/') }}" class="belisekarang">Beli Sekarang</a>
+            </div>
+        </div>
+
+    @endif
 
         
         @foreach($carts as $p => $value)
@@ -56,7 +79,7 @@
                                                 <!--<td>
                                                     <input class="my-activity" type="checkbox" name="activity{{ $cart->id }}" value="{{ $cart->product->price }}" />
                                                 </td>-->
-                                                <td>
+                                                <td style="width:43%;">
                                                     <div class="produk-cart pull-left mr-3">
                                                         <a href="{{ route('detail', $cart->product->slug) }}">
                                                             <img src="{{ url($cart->product->galleries->count() ? Storage::url($cart->product->galleries->first()->image) : '') }}" alt="...">
@@ -66,16 +89,16 @@
                                                         <a href="{{ route('detail', $cart->product->slug) }}">{{ $cart->product->name }}</a>
                                                     </div>
                                                 </td>
-                                                <td>
+                                                <td class="text-center" style="width:20%;">
                                                     @currency($cart->product->price)
                                                 </td>
-                                                <td>
+                                                <td class="text-center" style="width:8%;">
                                                         <input type='text' name='quantity{{$cart->id}}' value='{{ $cart->quantity }}' class='qty' disabled/>
                                                 </td>
-                                                <td>
+                                                <td class="text-center" style="width:21%;">
                                                     @currency($cart->product->price*$cart->quantity)
                                                 </td>
-                                                <td>
+                                                <td class="text-center" style="width:8%;">
                                                     <a href="{{ route('cart-delete', $cart->id) }}" class="hapus btn btn-round">
                                                         <i style="color: #747474;" class="fa fa-trash"></i>
                                                     </a>
@@ -155,23 +178,4 @@
     });    
 </script>
 <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-CjfNfNE4gZUkNvPP"></script>
-<script type="text/javascript">
-    document.getElementById('pay-button').onclick = function(){
-        // SnapToken acquired from previous step
-        snap.pay('{{$token}}', {
-            // Optional
-            onSuccess: function(result){
-                document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-            },
-            // Optional
-            onPending: function(result){
-                document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-            },
-            // Optional
-            onError: function(result){
-                document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-            }
-        });
-    };
-</script>
 @endpush

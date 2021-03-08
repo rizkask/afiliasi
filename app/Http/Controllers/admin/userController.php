@@ -8,7 +8,7 @@ use App\Http\Requests\admin\userRequest;
 use Illuminate\Support\Str;
 use App\Models\user;
 
-class userController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.

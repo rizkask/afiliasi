@@ -23,7 +23,7 @@ use GuzzleHttp\Exception\RequestException;
 use DB;
 use Cookie;
 
-class checkoutController extends Controller
+class CheckoutController extends Controller
 {
     public function index(Request $request, $id)
     {

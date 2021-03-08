@@ -15,21 +15,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
-class affiliateController extends Controller
+class AffiliateController extends Controller
 {
-    public function index($id)
-    {
-        $product = product::where('users_id',Auth::user()->id)->get();
-        $data = Crypt::decrypt($id);
-        $user = User::findOrFail($data);
-        $transaction = TransactionDetail::where('ref',Auth::user()->id)->orderBy('created_at','DESC')->get();
-
-        return view('pages.seller.affiliate.dashboard',[
-            'user' => $user,
-            'transaction' => $transaction,
-            'product' => $product,
-        ]);
-    }
 
     public function transaction($id)
     {
@@ -42,6 +29,17 @@ class affiliateController extends Controller
             'user' => $user,
             'transaction' => $transaction,
             'product' => $product,
+        ]);
+    }
+
+    public function detailowner($id)
+    {
+        $item = TransactionDetail::findOrFail($id);
+        $transaction = TransactionDetail::where('ref',Auth::user()->id)->orderBy('created_at','DESC')->get();
+        dd($transaction);
+
+        return view('pages.seller.affiliate.detail-owner',[
+            'transaction' => $transaction,
         ]);
     }
 
@@ -72,8 +70,13 @@ class affiliateController extends Controller
     public function confirm($id)
     {
         $cek = bukti::findorFail($id);
+        $claim = claim::where('id', $cek->claim_id)->first();
 
         $cek->update([
+            'confirm' => 1,
+        ]);
+
+        $claim->update([
             'confirm' => 1,
         ]);
 
@@ -90,8 +93,7 @@ class affiliateController extends Controller
         $y=TransactionDetail::where('claims_id',NULL)->where('users_id',$own->users_id)->get();
 
         foreach($y as $p){
-            $total += $p->product->komisi; 
-            
+            $total += $p->product->komisi;
         }
         
         $claim = claim::create([
@@ -151,6 +153,7 @@ class affiliateController extends Controller
         $data = $request->all();
 
         $x = bukti::where('claim_id', $id)->get();
+        $y = claim::where('id',$id)->first();
 
         if($x->count() > 0){
             $x->first()->update([
@@ -161,6 +164,7 @@ class affiliateController extends Controller
             $claim = bukti::create([
                 'image' => $request->file('image')->store('assets/bukti','public'),
                 'claim_id' => $id,
+                'total_claim' => $y->total_claim,
             ]);
 
             $tes = TransactionDetail::where('claims_id',$id)->get();

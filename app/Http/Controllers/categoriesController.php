@@ -7,7 +7,7 @@ use App\Models\category;
 use App\Models\product;
 
 
-class categoriesController extends Controller
+class CategoriesController extends Controller
 {
 
     /**

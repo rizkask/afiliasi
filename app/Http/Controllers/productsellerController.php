@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Crypt;
 
-class productsellerController extends Controller
+class ProductsellerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,11 +34,19 @@ class productsellerController extends Controller
     {
         $data = $request->all();
 
-        $data['image'] = $request->file('image')->store('assets/product','public');
+        $cek = productgallery::where('products_id',$request->products_id)->count();
 
-        productgallery::create($data);
+        if($cek<4){
+            $data['image'] = $request->file('image')->store('assets/product','public');
 
-        return redirect()->route('product-seller-edit', $request->products_id);
+            productgallery::create($data);
+
+            return redirect()->route('product-seller-edit', $request->products_id);
+        }
+        else{
+            return redirect()->route('product-seller-edit', $request->products_id)->with(['error' => 'Maksimal 4 foto tiap produk']);
+        }
+        
     }
 
     public function deletegallery(Request $request,$id)

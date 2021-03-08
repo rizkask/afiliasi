@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
-class settingsellerController extends Controller
+class SettingSellerController extends Controller
 {
     public function index($id)
     {
