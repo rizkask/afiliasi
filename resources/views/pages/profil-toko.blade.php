@@ -21,7 +21,7 @@
                                 @endif
                             </div>
                         </div> 
-                        <div class="row" >
+                        <div class="row toko" >
                             <div class="col-sm">
                                 <h3>{{ $item->store_name }}</h3>
                                 <h6><i class="fas fa-map-marker-alt"></i> {{ $item->regency->name }}</h6>

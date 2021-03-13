@@ -235,6 +235,7 @@ return [
         'TransactionDetail' => App\Models\TransactionDetail::class,
         'bukti' => App\Models\bukti::class,
         'claim' => App\Models\claim::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

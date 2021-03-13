@@ -11170,7 +11170,7 @@ input[type='radio'][class='variasi']:checked + label {
   font-size: 13px;
 }
 
-.head-toko a:hover{
+.head-toko .detail:hover{
   border: 1px solid rgb(67, 163, 62);
   color: rgb(67, 163, 62);
   padding: 7px;
@@ -11182,7 +11182,24 @@ input[type='radio'][class='variasi']:checked + label {
   font-size: 20px;
 }
 
+.head-toko .claim{
+  border: 1px solid rgb(148, 148, 148);
+  padding: 7px;
+  color:rgb(255, 255, 255);
+  background-color: rgb(67, 163, 62);
+  border-radius: 5%;
+  font-size: 13px;
+}
 
+.head-toko .novalid{
+  border: 1px solid rgb(148, 148, 148);
+  padding: 7px;
+  color:rgb(255, 255, 255);
+  background-color: rgb(67, 163, 62);
+  border-radius: 5%;
+  font-size: 13px;
+  cursor: default;
+}
 
 .head-toko .bawah p{
   margin-left: 25px;

@@ -22,8 +22,8 @@
           <nav>
               <div class="nav nav-tabs nav-fill" id="nav-tab">
                   <a class="nav-item nav-link" style="color: rgb(141, 141, 141);" href="{{ route('my-product-aff', $parameter) }}">Produk Afiliasi Saya</a>
-                  <a class="nav-item nav-link" style="color: rgb(141, 141, 141);" href="{{ route('afiliator', $parameter) }}">Afiliator</a>
-                  <a class="nav-item nav-link active" style="color: rgb(141, 141, 141);" href="{{ route('afiliator-trans', $parameter) }}">Transaksi</a>
+                  <a class="nav-item nav-link" style="color: rgb(141, 141, 141);" href="{{ route('afiliator', $parameter) }}">Daftar Afiliator</a>
+                  <a class="nav-item nav-link active" style="color: rgb(141, 141, 141);" href="{{ route('afiliator-trans', $parameter) }}">Pengajuan Komisi</a>
               </div>
           </nav>
           <div class="card-body">

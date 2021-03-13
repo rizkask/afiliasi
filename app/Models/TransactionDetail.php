@@ -26,7 +26,8 @@ class TransactionDetail extends Model
         'code',
         'ref',
         'bukti',
-        'claims_id'
+        'claims_id',
+        'ref_status'
     ];
 
     /**
@@ -57,6 +58,6 @@ class TransactionDetail extends Model
         if ($this->ref_status == 0) {
             return '<span class="badge badge-secondary">Pending</span>';
         }
-        return '<span class="badge badge-success">Dicairkan</span>';
+        return '<span class="badge badge-success">Diterima</span>';
     }
 }

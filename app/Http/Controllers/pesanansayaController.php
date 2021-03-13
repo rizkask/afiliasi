@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use PDF;
 
 class PesanansayaController extends Controller
 {
@@ -61,11 +62,12 @@ class PesanansayaController extends Controller
         ]);
     }
 
-    public function belilagi($id)
+    public function belilagi($code)
     {
-        $titip = TransactionDetail::where('id',$id);
-        $cek=$titip->transaction->id;
-        $items = TransactionDetail::where('transactions_id',$cek);
+        $data = Crypt::decrypt($code);
+        dd($data);
+
+        $items = TransactionDetail::where('transactions_id',$id)->get();
 
         foreach($items as $item){
             $cekproduct = cart::where('products_id',$item->product->id)->where('users_id',Auth::user()->id)->first();
@@ -99,6 +101,19 @@ class PesanansayaController extends Controller
             'items' => $item,
             'detail' => $detail,
         ]);
+    }
+
+    public function faktur($code,$id){
+
+        $item = Transaction::where('code',$code)->first();
+
+        $detail = TransactionDetail::where('transactions_id',$item->id)->get();
+ 
+    	$pdf = PDF::loadview('pages.faktur',[
+                'items'=>$detail,
+                ]);
+
+    	return $pdf->download('invoice');
     }
     
 }

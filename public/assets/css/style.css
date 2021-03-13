@@ -1358,6 +1358,14 @@ section {
   color:rgb(67, 163, 62);
 }
 
+.head-toko .toko h6{
+  color:rgb(138, 138, 138);
+}
+
+.head-toko .toko{
+  margin-top: 15px;
+}
+
 .head-toko h5{
   margin-top: 20px;
   margin-left: 10px;

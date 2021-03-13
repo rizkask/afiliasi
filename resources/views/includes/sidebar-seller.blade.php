@@ -33,15 +33,15 @@
   </li>
 
   <li class="nav-item {{ (request()->routeIs('affiliate')) || (request()->routeIs('list-affiliate')) || (request()->routeIs('my-product-aff')) || (request()->routeIs('affiliate-transaction')) || (request()->routeIs('afiliator')) 
-  || (request()->routeIs('affiliate-transaction')) || (request()->routeIs('owner')) || (request()->routeIs('bukti')) || (request()->routeIs('afiliator')) || (request()->routeIs('afiliator-trans')) || (request()->routeIs('pilih-affiliate')) ? 'active' : '' }}">
+  || (request()->routeIs('affiliate-transaction')) || (request()->routeIs('owner')) || (request()->routeIs('bukti')) || (request()->routeIs('afiliator')) || (request()->routeIs('afiliator-trans')) || (request()->routeIs('pilih-affiliate')) || (request()->routeIs('detail-owner')) ? 'active' : '' }}">
   <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
       <i class="fas fa-fw fa-link"></i>
       <span>Affiliate</span></a>
       <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item {{ (request()->routeIs('list-affiliate')) || (request()->routeIs('affiliate-transaction'))  ? 'active' : '' }}" href="{{ route('list-affiliate', $parameter) }}">Rekomendasi Saya</a>
-            <a class="collapse-item {{ (request()->routeIs('owner')) || (request()->routeIs('bukti')) ? 'active' : '' }}" href="{{ route('owner', $parameter) }}">Pengajuan Komisi</a>
-            <a class="collapse-item {{ (request()->routeIs('my-product-aff')) || (request()->routeIs('afiliator')) || (request()->routeIs('afiliator-trans'))  ? 'active' : '' }}" href="{{ route('my-product-aff', $parameter) }}">My Affiliate Product</a>
+            <a class="collapse-item {{ (request()->routeIs('owner')) || (request()->routeIs('bukti')) || (request()->routeIs('detail-owner')) ? 'active' : '' }}" href="{{ route('owner', $parameter) }}">Pengajuan Komisi</a>
+            <a class="collapse-item {{ (request()->routeIs('my-product-aff')) || (request()->routeIs('afiliator')) || (request()->routeIs('afiliator-trans'))  ? 'active' : '' }}" href="{{ route('my-product-aff', $parameter) }}">Produk Afiliasi</a>
             
           </div>
       </div>

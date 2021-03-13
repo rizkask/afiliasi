@@ -85,7 +85,7 @@
                             </div>
                             <div class="text-right">
                                 <hr>
-                                <a href="" class="variasi">Lihat Faktur</a></td>
+                                <a href="{{ route('faktur',['code'=>$items->code,'id'=>$parameter]) }}" class="variasi">Lihat Faktur</a></td>
                             </div>
                         </div>
                     </div>

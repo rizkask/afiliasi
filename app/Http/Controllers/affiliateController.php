@@ -34,9 +34,11 @@ class AffiliateController extends Controller
 
     public function detailowner($id)
     {
-        $item = TransactionDetail::findOrFail($id);
-        $transaction = TransactionDetail::where('ref',Auth::user()->id)->orderBy('created_at','DESC')->get();
-        dd($transaction);
+        $owner = User::findOrFail($id);
+        $product = product::where('users_id', $owner->id)->get();
+
+        $transaction = TransactionDetail::where('ref',Auth::user()->id)->orderBy('created_at','DESC')->where('users_id',$owner->id)->get();
+        
 
         return view('pages.seller.affiliate.detail-owner',[
             'transaction' => $transaction,
@@ -60,7 +62,7 @@ class AffiliateController extends Controller
 
     public function transin($id)
     {
-        $transaction = TransactionDetail::where('ref',Auth::user()->id)->where('bukti','!=',NULL)->get();
+        $transaction = TransactionDetail::where('ref',Auth::user()->id)->where('bukti','!=',NULL)->groupby('bukti')->get();
 
         return view('pages.seller.affiliate.bukti-komisi',[
             'transaction' => $transaction,
@@ -71,6 +73,7 @@ class AffiliateController extends Controller
     {
         $cek = bukti::findorFail($id);
         $claim = claim::where('id', $cek->claim_id)->first();
+        $detail = TransactionDetail::where('claims_id', $claim->id)->get();
 
         $cek->update([
             'confirm' => 1,
@@ -80,6 +83,12 @@ class AffiliateController extends Controller
             'confirm' => 1,
         ]);
 
+        foreach($detail as $d){
+            $d->update([
+                'ref_status' => 1,
+            ]);
+        }
+        
         return redirect()->back();
     }
 
@@ -99,7 +108,7 @@ class AffiliateController extends Controller
         $claim = claim::create([
             'afiliator_id' => Auth::user()->id,
             'total_claim' => $total,
-            'owner_id' => $own->users_id,
+            'owner_id' => $own->product->users_id,
         ]);
 
         
@@ -161,16 +170,18 @@ class AffiliateController extends Controller
             ]);
         }
         else{
-            $claim = bukti::create([
+            $bukti = bukti::create([
                 'image' => $request->file('image')->store('assets/bukti','public'),
                 'claim_id' => $id,
                 'total_claim' => $y->total_claim,
             ]);
 
             $tes = TransactionDetail::where('claims_id',$id)->get();
-            $tes->first()->update([
-                'bukti' => $claim->id,
-            ]);
+            foreach($tes as $t){
+                $t->update([
+                    'bukti' => $bukti->id,
+                ]);
+            }
             
         }
         

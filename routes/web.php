@@ -162,6 +162,10 @@ Route::get('affiliate-program', 'AffiliateController@index')
         ->name('sign-up-affiliate')
         ->middleware(['auth','verified']);
 
+Route::get('/pesanan-saya/beli-lagi/{code}', 'PesanansayaController@belilagi')
+        ->name('belilagi')
+        ->middleware(['auth','verified']);;
+
 
 
 
@@ -177,8 +181,9 @@ Route::middleware(['auth','currentUser','verified'])
         Route::get('/pesanan-saya/dikirim/{id}', 'PesanansayaController@sent')->name('sent');
         Route::get('/pesanan-saya/selesai/{id}', 'PesanansayaController@done')->name('done');
         Route::get('/pesanan-saya/dibatalkan/{id}', 'PesanansayaController@cancel')->name('cancel');
-        Route::get('/pesanan-saya/beli-lagi/{id}', 'PesanansayaController@belilagi')->name('belilagi');
+        
         Route::get('/pesanan-saya/rincian-pesanan/{code}/{id}', 'PesanansayaController@rincian')->name('rincian-pesanan');
+        Route::get('/pesanan-saya/faktur/{code}/{id}', 'PesanansayaController@faktur')->name('faktur');
     });
 
 Route::prefix('admin')

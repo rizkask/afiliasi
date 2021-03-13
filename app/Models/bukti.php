@@ -13,7 +13,7 @@ class bukti extends Model
     protected $table='bukti';
 
     protected $fillable = [
-        'image', 'claim_id','confirm'
+        'image', 'claim_id','confirm','total_claim'
     ];
 
     protected $hidden = [

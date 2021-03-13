@@ -100,7 +100,10 @@
                                         <tr class="text-right">
                                           <td colspan="2">Total Pesanan: <b class="harga">@currency($totalPrice)</b>
                                           <br><br>
-                                          <a href="{{ route('belilagi', $value->first()->id) }}" class="belilagi">Beli Lagi</a>
+                                            <?php
+                                                $beli= Crypt::encrypt($value->first()->transactions_id);
+                                            ?>
+                                          <!--<a href="{{ route('belilagi', $beli) }}" class="belilagi">Beli Lagi</a>-->
                                           <a href="{{ route('rincian-pesanan', ['code'=>$value->first()->transaction->code,'id'=>$parameter]) }}" class="variasi">Tampilkan Rincian Pesanan</a></td>
                                           <?php $totalPrice = 0 ?>
                                         </tr>
