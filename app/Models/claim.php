@@ -13,7 +13,7 @@ class claim extends Model
     protected $table='claim';
 
     protected $fillable = [
-        'afiliator_id', 'owner_id','total_claim','confirm'
+        'afiliator_id', 'total_claim','confirm'
     ];
 
     protected $hidden = [

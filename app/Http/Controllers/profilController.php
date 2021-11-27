@@ -34,7 +34,6 @@ class ProfilController extends Controller
             $item->update([
                 'name' => $request->name,
                 'phone_number' => $request->phone_number,
-                'store_name' => $request->store_name,
                 'image' => $request->file('image')->store('assets/avatar','public'),
             ]);
         }
@@ -42,7 +41,6 @@ class ProfilController extends Controller
             $item->update([
                 'name' => $request->name,
                 'phone_number' => $request->phone_number,
-                'store_name' => $request->store_name,
             ]);
         }
         
@@ -54,18 +52,19 @@ class ProfilController extends Controller
     {
         $data = Crypt::decrypt($id);
         $request->validate([
-            'provinces_id' => 'required|int',
-            'regencies_id' => 'required|int',
+            'nama_provinsi' => 'required',
+            'nama_distrik' => 'required',
             'zip_code' => 'required|int',
             'address_one' => 'required',
         ]);
 
         $item = User::findOrFail($data);
         $item->update([
-            'provinces_id' => $request->provinces_id,
-            'regencies_id' => $request->regencies_id,
+            'provinces_id' => $request->nama_provinsi,
+            'regencies_id' => $request->nama_distrik,
             'zip_code' => $request->zip_code,
             'address_one' => $request->address_one,
+            'regencies_name' => $request->regencies_name,
         ]);
 
         return redirect()->back()->with(['success' => 'Data berhasil diubah']);

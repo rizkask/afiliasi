@@ -8,6 +8,15 @@
 <br>
 <!------ Include the above in your HEAD tag ---------->
 <div class="container">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
           
 	<div class="row">
 		<div class="col-md-2 ">
@@ -18,7 +27,6 @@
               <a href="{{ route('profil', $parameter) }}" style="font-size: 14px; color:rgb(67, 163, 62);" class="list-group-item list-group-item-action">Akun Saya</a>
               <a href="{{ route('pass', $parameter) }}" style="font-size: 14px;" class="list-group-item list-group-item-action">Ubah Password</a>
               <a href="{{ route('pesanan-saya', $parameter) }}" style="font-size: 14px;" class="list-group-item list-group-item-action">Pesanan Saya</a>
-              <a href="{{ route('afiliasi', $parameter) }}" style="font-size: 14px;" class="list-group-item list-group-item-action">Afiliasi</a>
           </div> 
 		</div>
 		<div class="col-md-10">
@@ -39,7 +47,7 @@
                             <div class="col-md-9">
 
                               <div class="form-group row">
-                                <label for="name" class="col-4 col-form-label">Nama Lengkap</label> 
+                                <label for="name" class="col-4 col-form-label">Nama Lengkap *</label> 
                                 <div class="col-8">
                                   <input id="name" name="name" value="{{ $item->name }}" class="form-control @error('name') is-invalid @enderror" type="text">
                                   @error('name')
@@ -69,15 +77,26 @@
                                 </div>
                               </div>
 
+                              <!--<div class="form-group row">
+                                <label for="name" class="col-4 col-form-label">Nama Toko</label> 
+                                <div class="col-8">
+                                  <input id="store_name" name="store_name" value="{{ $item->store_name }}" class="form-control @error('store_name') is-invalid @enderror" type="text">
+                                  @error('store_name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                  @enderror
+                                </div>
+                              </div>-->
+
                               <div class="form-group row">
                                 <label for="address_one" class="col-4 col-form-label">Alamat</label> 
                                 <div class="col-8">
                                   <p>
                                   @if(Auth::user()->regencies_id && Auth::user()->provinces_id)
-                                  
                                     {{ $item->address_one }}<br>
-                                    {{ $item->regencies_name }}, {{ $item->zip_code}}<br>
-                                    {{ $item->provinces_id }}
+                                    {{ $item->regency->name }}, {{ $item->zip_code}}<br>
+                                    {{ $item->province->name }}
                                   @else
                                   <input type="text" class="form-control" value="Data Kosong" disabled/>
                                   @endif
@@ -132,22 +151,37 @@
       </div>
       <div class="modal-body">
       <!--FORM UPDATE BARANG-->
-        <form  action="{{ route('update-address',$parameter) }}" method="post" enctype="multipart/form-data">
+        <form id="locations" action="{{ route('update-address',$parameter) }}" method="post" enctype="multipart/form-data">
           @csrf
           <div class="form-group">
-            <label>Provinsi</label>
-            <select class="form-control" name="nama_provinsi">
-              
+            <label for="provinces_id">Provinsi</label>
+            <select id="provinces_id" class="form-control" name="provinces_id" v-if="provinces" v-model="provinces_id">
+              <option v-for="province in provinces" :value="province.id">
+                @{{ province.name }}
+              </option>
             </select>
+            <select v-else class="form-control"></select>
           </div>
 
           <div class="form-group">
-            <label>Kota/Kabupaten</label>
-            <select class="form-control" name="nama_distrik">
-
+            <label for="regencies_id">Kota/Kabupaten</label>
+            <select id="regencies_id" class="form-control" name="regencies_id" v-if="regencies" v-model="regencies_id">
+              <option v-for="regency in regencies" :value="regency.id">
+                @{{ regency.name }}
+              </option>
             </select>
+            <select v-else class="form-control"></select>
           </div>
 
+          <div class="form-group">
+            <label for="districts_id">Kecamatan</label>
+            <select id="districts_id" class="form-control" name="districts_id" v-if="districts" v-model="districts_id">
+              <option v-for="district in districts" :value="district.id">
+                @{{ district.name }}
+              </option>
+            </select>
+            <select v-else class="form-control"></select>
+          </div>
 
           <div class="form-group">
             <label for="zip_code">Kode Pos</label>
@@ -174,6 +208,60 @@
 @endsection
 
 @push('addon-script')
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-toasted"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    var locations = new Vue({
+      el: "#locations",
+      mounted(){
+        AOS.init();
+        this.getProvincesData();
+        this.getRegenciesData();
+      },
+      data:{
+        provinces:null,
+        regencies:null,
+        districts:null,
+        provinces_id:null,
+        regencies_id:null,
+        districts_id:null,
+      },
+      methods:{
+        getProvincesData(){
+          var self = this;
+          axios.get('{{ route('api-provinces') }}')
+          .then(function(response){
+            self.provinces = response.data;
+          })
+        },
+        getRegenciesData(){
+          var self = this;
+          axios.get('{{ url('api/regencies') }}/' + self.provinces_id)
+          .then(function(response){
+            self.regencies = response.data;
+          })
+        },
+        getDistrictsData(){
+          var self = this;
+          axios.get('{{ url('api/districts') }}/' + self.regencies_id)
+          .then(function(response){
+            self.districts = response.data;
+          })
+        },
+      },
+      watch:{
+        provinces_id: function(val, oldVal){
+          this.regencies_id = null;
+          this.getRegenciesData();
+        },
+        regencies_id: function(val, oldVal){
+          this.districts_id = null;
+          this.getDistrictsData();
+        }
+      }
+    });
+  </script>
   <script>
       function readURL(input) {
         if (input.files && input.files[0]) {
@@ -189,52 +277,6 @@
 
       $("#cat_image").change(function(){
           readURL(this);
-      });
-  </script>
-
-  <script>
-
-      $(document).ready(function () {
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-      });
-      
-      $(document).ready(function(){
-          $.ajax({
-              type:'post',
-              url:"{{ URL::to('profil/dataprovinsi') }}",
-              success:function(hasil_provinsi)
-              {
-                  $("select[name=nama_provinsi]").html(hasil_provinsi);
-              }
-          });
-
-          $("select[name=nama_provinsi]").on("change",function(){
-              var id_provinsi_terpilih = $("option:selected", this).attr("id_provinsi");
-              $.ajax({
-                  type:'post',
-                  url: "{{ URL::to('profil/datadistrik') }}",
-                  data: 'id_provinsi='+id_provinsi_terpilih,
-                  success:function(hasil_distrik)
-                  {
-                    $("select[name=nama_distrik]").html(hasil_distrik);
-                  }
-              })
-          });
-
-          $("select[name=nama_distrik]").on("change",function(){
-              var nama_distrik_terpilih = $("option:selected", this).attr("nama_distrik");
-              var tipe_distrik = $("option:selected", this).attr("tipe_distrik");
-              $('<input>').attr({
-                    type: 'hidden',
-                    name: 'regencies_name',
-                    value: tipe_distrik+" "+nama_distrik_terpilih,
-              }).appendTo('form')
-          });
       });
   </script>
 @endpush

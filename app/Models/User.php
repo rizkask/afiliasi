@@ -23,13 +23,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'roles',
         'provinces_id',
         'regencies_id',
-        'store_name',
-        'slug',
+        'regencies_name',
         'phone_number',
         'address_one',
         'zip_code',
         'image',
-        'store_status'
     ];
 
     /**

@@ -28,7 +28,6 @@
                         <th>Kode</th>
                         <th>Pembeli</th>
                         <th>Produk</th>
-                        <th>Pemilik</th>
                         <th>Komisi</th>
                         <th>Status</th>
                         <th>Tanggal</th>
@@ -42,7 +41,6 @@
                           <td>{{ $item->code }}</td><?php $i++ ?>
                           <td>{{ $item->transaction->user->name }}</td>
                           <td>{!! $item->product->name !!}</td>
-                          <td>{!! $item->product->user->store_name !!}</td>
                           <td>{!! $item->product->komisi !!}</td>
                           <td>{!! $item->ref_status_label !!}</td>
                           <td>{{ $item->created_at }}</td>

@@ -15,12 +15,10 @@ class SellerController extends Controller
 {
     public function index(Request $request)
     {
-        $product = product::where('users_id',Auth::user()->id)->get();
+        $product = product::get();
 
         $sell = TransactionDetail::with(['transaction.user','product.galleries'])
-                    ->whereHas('product', function($product){
-                        $product->where('users_id',Auth::user()->id);
-                    })->orderBy('created_at','DESC')->get();
+                    ->orderBy('created_at','DESC')->get();
         
         $transaction=$sell->count();
 

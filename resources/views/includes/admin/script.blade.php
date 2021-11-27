@@ -23,5 +23,6 @@
 
 <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
 <script>
-        CKEDITOR.replace( 'editor' );
+        CKEDITOR.replace( 'editor');
+        CKEDITOR.config.fontSize_defaultLabel = '12px';
 </script>

@@ -4,7 +4,7 @@
   <!-- Sidebar - Brand -->
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
     <div class="sidebar-brand-text mx-3">
-      Epic Tour & Travel
+      Toko Online
     </div>
   </a>
 
@@ -26,33 +26,35 @@
 
   <li class="nav-item {{ (request()->routeIs('category.index')) || (request()->routeIs('category.create')) || (request()->routeIs('category.edit')) ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('category.index') }}">
-      <i class="fas fa-fw fa-user"></i>
-      <span>Categories</span></a>
+      <i class="fas fa-fw fa-list-alt"></i>
+      <span>Kategori</span></a>
   </li>
   
   <li class="nav-item {{ (request()->routeIs('product.index')) || (request()->routeIs('product.create')) || (request()->routeIs('product.edit')) ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('product.index') }}">
-      <i class="fas fa-fw fa-bell"></i>
-      <span>Products</span></a>
+      <i class="fas fa-fw fa-tags"></i>
+      <span>Produk</span></a>
   </li>
 
-  <li class="nav-item {{ (request()->routeIs('productgallery.index')) || (request()->routeIs('productgallery.create')) || (request()->routeIs('productgallery.edit')) ? 'active' : '' }}">
-    <a class="nav-link" href="{{ route('productgallery.index') }}">
-      <i class="fas fa-fw fa-bell"></i>
-      <span>Products Gallery</span></a>
-  </li>
-
-  <li class="nav-item ">
-    <a class="nav-link" href="">
-      <i class="fas fa-fw fa-dollar-sign"></i>
-      <span>Transactions</span></a>
-  </li>
-  
   <li class="nav-item {{ (request()->routeIs('user.index')) || (request()->routeIs('user.create')) || (request()->routeIs('user.edit')) ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('user.index') }}">
-      <i class="fas fa-fw fa-dollar-sign"></i>
-      <span>Users</span></a>
+      <i class="fas fa-fw fa-user"></i>
+      <span>Pelanggan</span></a>
   </li>
+
+  <li class="nav-item {{ (request()->routeIs('transaction.index')) || (request()->routeIs('transaction.edit')) ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('transaction.index') }}">
+      <i class="fas fa-fw fa-dollar-sign"></i>
+      <span>Transaksi</span></a>
+  </li>
+  
+  <li class="nav-item {{ (request()->routeIs('afiliasi.create')) || (request()->routeIs('afiliasi.edit')) ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('afiliasi.create') }}">
+      <i class="fas fa-fw fa-link"></i>
+      <span>Afiliasi</span></a>
+  </li>
+
+  
 
   <hr class="sidebar-divider">
 

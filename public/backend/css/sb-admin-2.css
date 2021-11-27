@@ -487,6 +487,13 @@ mark,
   height: auto;
 }
 
+.foto-produk{
+  width: 70px;
+  height: 70px;
+  border: 2px solid #cecece;
+  object-fit: cover;
+}
+
 .img-thumbnail {
   padding: 0.25rem;
   background-color: #fff;
@@ -10986,6 +10993,10 @@ form.user .btn-user {
 footer.sticky-footer {
   padding: 2rem 0;
   flex-shrink: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
 }
 
 footer.sticky-footer .copyright {
@@ -11156,6 +11167,10 @@ input[type='radio'][class='variasi']:checked + label {
   border-radius: 1rem;
   padding: 6px;
   font-size: 11px;
+}
+
+.shipping{
+  margin-bottom: -130px;
 }
 
 .head-toko{

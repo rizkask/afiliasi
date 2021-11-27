@@ -12,7 +12,7 @@
 		}
 	</style>
 	<center>
-		<h5>Laporan Keuangan Epic Tour and Travel</h4>
+		<h5>Laporan Keuangan Toko Online</h4>
 	</center>
  
 	<table class='table table-bordered'>
@@ -33,14 +33,14 @@
 				@if($item->paket_customs_id == NULL)
 				<td>{{ $i++ }}</td>
 				<td>{{ $item->user->nama_depan }} {{ $item->user->nama_belakang }}</td>
-				<td>{{ $item->created_at }}</td>
+				<td>{{ $item->created_at->addMinutes(421) }}</td>
 				<td>{!! $item->travel_package->title !!}</td>
 				<td>{{ $item->details->count() }} peserta</td>
 				<td>@currency( $item->transaction_total )</td>
 				@elseif($item->travel_packages_id == NULL)
 				<td>{{ $i++ }}</td>
 				<td>{{ $item->user->nama_depan }} {{ $item->user->nama_belakang }}</td>
-				<td>{{ $item->created_at }}</td>
+				<td>{{ $item->created_at->addMinutes(421) }}</td>
 				<td>{!! $item->paket_custom->title !!}</td>
 				<td>{{ $item->details->count() }} peserta</td>
 				<td>@currency( $item->transaction_total )</td>

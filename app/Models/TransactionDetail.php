@@ -18,7 +18,6 @@ class TransactionDetail extends Model
     protected $fillable = [
         'transactions_id',
         'products_id',
-        'users_id',
         'price',
         'shipping_status',
         'resi',
@@ -27,7 +26,8 @@ class TransactionDetail extends Model
         'ref',
         'bukti',
         'claims_id',
-        'ref_status'
+        'ref_status',
+        'komisi'
     ];
 
     /**
@@ -56,8 +56,13 @@ class TransactionDetail extends Model
     public function getRefStatusLabelAttribute()
     {
         if ($this->ref_status == 0) {
-            return '<span class="badge badge-secondary">Pending</span>';
+            return '<span class="badge badge-secondary">Belum Diajukan</span>';
         }
-        return '<span class="badge badge-success">Diterima</span>';
+        elseif($this->ref_status == 1){
+            return '<span class="badge badge-primary">Sudah Diajukan</span>';
+        }
+        else{
+            return '<span class="badge badge-success">Diterima</span>';
+        }
     }
 }

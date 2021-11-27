@@ -12,10 +12,13 @@ use Exception;
 
 use Midtrans\Snap;
 use Midtrans\Config;
+use Midtrans\Notification;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Http;
+
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -46,7 +49,6 @@ class CheckoutController extends Controller
             $data = [
                 'products_id' => $cek,
                 'users_id' => Auth::user()->id,
-                'pemilik_id' => $request->pemilik_id,
                 'quantity' => $request->quantity,
             ];
 
@@ -64,7 +66,7 @@ class CheckoutController extends Controller
         return redirect()->route('cart')->cookie($cookie);
     }
 
-    public function process(Request $request, $id)
+    public function process(Request $request)
     {
 
         $code = 'STORE-' . mt_rand(000000,999999);
@@ -84,25 +86,20 @@ class CheckoutController extends Controller
                 'email' => Auth::user()->email,
             ],
             'enabled_payments' => [
-                'gopay','permata_va','bank_transfer'
+                'permata_va','bank_transfer'
             ],
-            'vtweb' => []
+            'vtweb' => [],
         ];
 
         DB::beginTransaction();
-        $client = new Client();
         try {
-            $res = $client->request('GET','API_URL', []);
-            $data = json_decode($res->getBody()->getContents());
 
-            $cek = cart::where('id',$id)->get();
-            //dd($cek->first()->pemilik_id);
-            $carts = cart::with(['product','user'])->where('users_id', Auth::user()->id)->where('pemilik_id',$cek->first()->pemilik_id)->get(); 
+            $carts = cart::with(['product','user'])->where('users_id', Auth::user()->id)->get(); 
 
             $transaction = Transaction::create([
                 'users_id' => Auth::user()->id,
                 'insurance_price' => 0,
-                'shipping_price' => 0,
+                'shipping_price' => $request->shipping_price,
                 'total_price' => $request->total_price,
                 'transaction_status' => 'PENDING',
                 'code' => $code,
@@ -118,13 +115,13 @@ class CheckoutController extends Controller
                     TransactionDetail::create([
                         'transactions_id' => $transaction->id,
                         'products_id' => $cart->product->id,
-                        'users_id' => $cart->product->user->id,
                         'quantity' => $cart->quantity,
                         'price' => $cart->product->price*$cart->quantity,
                         'shipping_status' => 'PENDING',
                         'resi' => '',
                         'code' => $trx,
-                        'ref' => $explodeAffiliate[1] == $cart->product->id && $affiliate != '' && $explodeAffiliate[0] != Auth::user()->id ? $affiliate:NULL
+                        'ref' => $explodeAffiliate[1] == $cart->product->id && $affiliate != '' && $explodeAffiliate[0] != Auth::user()->id ? $affiliate:NULL,
+                        'komisi' => $cart->product->komisi
                     ]);
                 }
                 else{
@@ -144,7 +141,10 @@ class CheckoutController extends Controller
                 product::where('id', $cart->product->id)->increment('sold',1);
             }
             
-            cart::where('pemilik_id',$cek->first()->pemilik_id)->delete();
+            foreach($carts as $x){
+                $x->delete();
+            }
+            
             
             $carts = $this->getCarts();
 
@@ -155,10 +155,14 @@ class CheckoutController extends Controller
             Cookie::queue(Cookie::forget('dw-afiliasi'));
 
             // Get Snap Payment Page URL
-            $paymentUrl = Snap::createTransaction($midtrans)->redirect_url;
+            $paymentUrl = Snap::createTransaction($midtrans);
+
+            Transaction::where('id',$transaction->id)->update([
+                'payment_url' => $paymentUrl->token,
+            ]);
             
             // Redirect to Snap Payment Page
-            return redirect($paymentUrl)->cookie($cookie);
+            return redirect($paymentUrl->redirect_url)->cookie($cookie);
         }
         catch (Exception $e) {
             DB::rollback();
@@ -166,42 +170,106 @@ class CheckoutController extends Controller
         }
     }
 
-    public function post(Request $req)
+    public function post(Request $request)
     {
         try {
-            $notification_body = json_decode($req->getContent(), true);
+            $notification_body = json_decode($request->getContent(), true);
             $invoice = $notification_body['order_id'];
             $transaction_id = $notification_body['transaction_id'];
             $status_code = $notification_body['status_code'];
-            $order = Order::where('invoice', $invoice)->where('transaction_id', $transaction_id)->first();
+            $order = Transaction::where('code', $invoice)->first();
             if (!$order)
                 return ['code' => 0, 'messgae' => 'Terjadi kesalahan | Pembayaran tidak valid'];
                 switch ($status_code) {
                     case '200':
-                        $order->status = "SUCCESS";
+                        $order->transaction_status = "SUCCESS";
                         break;
                     case '201':
-                        $order->status = "PENDING";
+                        $order->transaction_status = "PENDING";
                         break;
                     case '202':
-                        $order->status = "CANCEL";
+                        $order->transaction_status = "CANCEL";
                         break;
                 }
                 $order->save();
                 return response('Ok', 200)->header('Content-Type', 'text/plain');
-            } catch (\Exception $e) {
-                return response('Error', 404)->header('Content-Type', 'text/plain');
-            }
+        } catch (\Exception $e) {
+            return response('Error', 404)->header('Content-Type', 'text/plain');
+        }
     }
 
     public function callback(Request $request)
     {
+
+        Config::$serverKey = config('services.midtrans.serverKey');
+        Config::$isProduction = config('services.midtrans.isProduction');
+        Config::$isSanitized = config('services.midtrans.isSanitized');
+        Config::$is3ds = config('services.midtrans.is3ds');
+        
+        try {
+            $notification_body = json_decode($request->getContent(), true);
+            $invoice = $notification_body['order_id'];
+            $type = $notification_body['payment_type'];
+            $fraud = $notification_body['fraud_status'];
+            $status = $notification_body['transaction_status'];
+
+            $order = Transaction::where('code', $invoice)->first();
+            $items = $order->details->first();
+            if (!$order)
+                return ['code' => 0, 'messgae' => 'Terjadi kesalahan | Pembayaran tidak valid'];
+            switch ($status) {
+                case 'settlement':
+                    $order->transaction_status = 'SUCCESS';
+                    $items->update([
+                        'shipping_status' => 'DIKEMAS',
+                    ]);
+                    break;
+                case 'pending':
+                    $order->transaction_status = "PENDING";
+                    break;
+                case 'deny':
+                    $order->transaction_status = "CANCELLED";
+                    break;
+                case 'cancel':
+                    $order->transaction_status = "CANCELLED";
+                    break;
+                case 'expire':
+                    $order->transaction_status = "CANCELLED";
+                    break;
+            }
+            $order->save();
+            return response('Ok', 200)->header('Content-Type', 'text/plain');
+        } catch (\Exception $e) {
+            return response('Error', 404)->header('Content-Type', 'text/plain');
+        }
         
     }
 
-    public function success(Request $request, $id)
+    public function success(Request $request)
     {
+        $response = Http::get('https://api.sandbox.midtrans.com/v2/STORE-784147/status');
+        $data = $response->json();
+        dd($data);
+    }
 
-        return view('pages.success');
+    public function beli(Request $request, $id)
+    {
+        $cek = cart::where('id',$id)->get();
+        $carts = cart::with(['product','user'])->where('users_id', Auth::user()->id)->get();
+
+        $carts = $this->getCarts();
+
+        $cookie = cookie('dw-carts', json_encode($carts), 2880);
+        return redirect()->route('indexbeli',$id)->cookie($cookie);
+    }
+
+    public function indexbeli()
+    {
+        $cart = cart::with(['product.galleries','user'])->where('users_id', Auth::user()->id)->get();
+        $totalPrice = 0;
+        return view('pages.beli',[
+            'carts' => $cart,
+            'totalPrice' => $totalPrice,
+        ]);
     }
 }

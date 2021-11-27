@@ -1,110 +1,67 @@
 @extends('layouts.admin')
 
 @section('content')
-    <!-- Begin Page Content -->
 <div class="container-fluid">
 
-      <!-- Page Heading -->
-    <div class="tombol d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="tombol d-sm-flex align-items-center mb-4">
         <h1 class="h3 mb-0 text-gray-800">Transaksi</h1>
-        <a href="{{ route('transaction.cetak') }}" class="btn btn-sm btn-primary shadow-sm">
-            <i class="fas fa-download fa-sm text-white-50"></i>Laporan Keuangan
-        </a>
     </div>
-    <div class="tombol d-sm-flex align-items-center justify-content-between mb-4">
-        <p class="h3 mb-0 text-gray-800">Total Biaya Masuk: @currency($sum)</p>
-    </div>
-      
-    <section id="tabs">
-        <div class="container">
-            <div class="card show mb-4">
-                <nav>
-                    <div class="nav nav-tabs nav-fill" id="nav-tab">
-                        <a class="nav-item nav-link active" href="{{ route('transaction.index') }}" aria-selected="true">Paket Travel</a>
-                        <a class="nav-item nav-link" href="{{ route('transaction_custom') }}" aria-selected="false">Paket Custom</a>
-                    </div>
-                </nav>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
+
+    <?php
+        $parameter= Crypt::encrypt(Auth::user()->id);
+    ?>
+    <div class="card show mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Waktu Transaksi</th>
+                        <th>Kode Transaksi</th>
+                        <th>Pembeli</th>
+                        <th>Total Pembelian</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($sells as $sell)
                             <tr>
-                                <th width="10">No.</th>
-                                <th>Travel</th>
-                                <th>User</th>
-                                <th width="90">Jumlah Penumpang</th>
-                                <th width="110">Total Biaya</th>
-                                <th width="90">Status</th>
-                                <th width="118">Aksi</th>
+                                <td>{{ $sell->created_at->addMinutes(421) }}</td>
+                                <td>{{ $sell->code }}</td>
+                                <td>{!! $sell->user->name !!}</td>
+                                <td>@currency($sell->total_price)</td>
+
+                                @if($sell->details->first()->shipping_status=="PENDING")
+                                <td><mark class="badge badge-secondary">Belum Bayar</mark></td>
+                                @elseif($sell->details->first()->shipping_status=="DIKEMAS")
+                                <td><mark class="badge badge-primary">Dikemas</mark></td>
+                                @elseif($sell->details->first()->shipping_status=="SHIPPING")
+                                <td><mark class="badge badge-warning">Dikirim</mark></td>
+                                @elseif($sell->details->first()->shipping_status=="SUCCESS")
+                                <td><mark class="badge badge-success">Selesai</mark></td>
+                                @elseif($sell->details->first()->shipping_status=="CANCELLED")
+                                <td><mark class="badge badge-danger">Dibatalkan</mark></td>
+                                @endif
+                                <td class="text-center">
+                                    <a href="{{ route('transaction.edit',$sell->details->first()->id) }}" class="btn ">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                </td>
                             </tr>
-                            </thead>
-                            <tbody>
-                            <?php $i=1 ?>
-                            @forelse($items as $item)
-                                <tr>
-                                    <td class="text-center">{{ $i }}</td><?php $i++ ?>
-                                    <td>{!! $item->travel_package->title !!}</td>
-                                    <td>{!! $item->user->nama_depan !!}</td>
-                                    <td class="text-center">{!! $item->details->count() !!}</td>
-                                    <td>@currency($item->transaction_total)</td>
-                                    @if($item->transaction_status=="SUCCESS")
-                                    <td class="text-center"><mark class="transaction-success">{!! $item->transaction_status !!}</mark></td>
-                                    @elseif($item->transaction_status=="PENDING")
-                                    <td class="text-center"><mark class="transaction-pending">{!! $item->transaction_status !!}</mark></td>
-                                    @elseif($item->transaction_status=="CANCEL")
-                                    <td class="text-center"><mark class="transaction-cancel">{!! $item->transaction_status !!}</mark></td>
-                                    @elseif($item->transaction_status=="IN_CART")
-                                    <td class="text-center"><mark class="transaction-incart">{!! $item->transaction_status !!}</mark></td>
-                                    @elseif($item->transaction_status=="FAILED")
-                                    <td class="text-center"><mark class="transaction-failed">{!! $item->transaction_status !!}</mark></td>
-                                    @endif
-                                    <td class="text-center">
-                                        <a href="{{ route('transaction.show', $item->id) }}" class="btn btn-outline-primary btn-round">
-                                            <i class="fa fa-eye"></i>
-                                        </a>
-                                        <a href="{{ route('transaction.edit', $item->id) }}" class="btn btn-outline-info btn-round">
-                                            <i class="fa fa-pencil-alt"></i>
-                                        </a>
-                                        <a href="#" data-target="#myModal{{$item->id}}" data-toggle="modal" data-url="{{ route('transaction.destroy', $item->id) }}" data-id="{{ $item->id }}" class="hapus btn btn-outline-danger btn-round">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-    <div id="myModal{{$item->id}}" class="modal fade myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- dialog body -->
-                <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    Apakah Anda yakin ingin menghapus data ini?
-                </div>
-                <!-- dialog buttons -->
-                <form action="{{ route('transaction.destroy', $item->id) }}" id="deleteForm" method="post" class="d-inline">
-                    @csrf
-                    @method('delete')
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Hapus</button>
-                        
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
                             @empty
-                                <td colspan="7" class="text-center">
+                            <tr>
+                                <td colspan="6" class="text-center">
                                     Data Kosong
                                 </td>
-                            @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                            </tr>
+                        @endforelse
+                            
+                    </tbody>
+                </table>
             </div>
         </div>
-    </section>
+    </div>
+        
 </div>
-
-    
-    <!-- /.container-fluid -->
 @endsection

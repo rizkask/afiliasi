@@ -8,6 +8,7 @@
     <title>@yield('title')</title>
     <meta content="" name="descriptison">
     <meta content="" name="keywords">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- style -->
     @stack('prepend-style')
@@ -21,148 +22,105 @@
     ======================================================== -->
 </head>
 
-<body>
+    <body>
 
-  
-
-    <!-- ======= navbar ======= -->
-    @include('includes.navbar')
-
-    <!-- ======= main content ======= -->
-    @yield('content')
-
-    @if ($message = Session::get('success'))
-    <div class="container">
-      <div class="row">
-          <div class="modal fade" id="ignismyModal" role="dialog">
-              <div class="modal-dialog">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-label=""><span>×</span></button>
-                      </div>
-            
-                      <div class="modal-body">
-                        <div class="thank-you-pop">
-                          <img src="http://goactionstations.co.uk/wp-content/uploads/2017/03/Green-Round-Tick.png" alt="">
-                          <p>{{ $message }}</p>
-                        </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-    </div>
-    @endif
-
-    <!-- ======= Footer ======= -->
-    @include('includes.footer')
     
-    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
-    @stack('prepend-script')
-    @include('includes.script')
-    @stack('addon-script')
-    <script>
-      @if ($message = Session::get('success'))
-        $(function() {
-            $('#ignismyModal').modal('show');
-        });
-      @endif
-    </script>
-    <script>
-              // call onload or in script segment below form
-        function attachCheckboxHandlers() {
-            // get reference to element containing toppings checkboxes
-            var el = document.getElementById('toppings');
+        <!-- ======= navbar ======= -->
+        @include('includes.navbar')
 
-            // get reference to input elements in toppings container element
-            var tops = el.getElementsByTagName('input');
-            
-            // assign updateTotal function to onclick property of each checkbox
-            for (var i=0, len=tops.length; i<len; i++) {
-                if ( tops[i].type === 'checkbox' ) {
-                    tops[i].onclick = updateTotal;
-                }
-            }
-        }
-            
-        // called onclick of toppings checkboxes
-        function updateTotal(e) {
-            // 'this' is reference to checkbox clicked on
-            var form = this.form;
-            
-            // get current value in total text box, using parseFloat since it is a string
-            var val = parseFloat( form.elements['total'].value );
-            
-            // if check box is checked, add its value to val, otherwise subtract it
-            if ( this.checked ) {
-                val += parseFloat(this.value);
-            } else {
-                val -= parseFloat(this.value);
-            }
-            
-            // format val with correct number of decimal places
-            // and use it to update value of total text box
-            form.elements['total'].value = formatDecimal(val);
-        }
-            
-        // format val to n number of decimal places
-        // modified version of Danny Goodman's (JS Bible)
-        function formatDecimal(val, n) {
-            n = n || 2;
-            var str = "" + Math.round ( parseFloat(val) * Math.pow(10, n) );
-            while (str.length <= n) {
-                str = "0" + str;
-            }
-            var pt = str.length - n;
-            return str.slice(0,pt) + "." + str.slice(pt);
-        }
+        <!-- ======= main content ======= -->
+        @yield('content')
 
-        // in script segment below form
-        attachCheckboxHandlers();
-    </script>
-    <script>
-        $(document).ready(function() {        
-            $(".my-activity").click(function(event) {
-                var total = 0;
-                $(".my-activity:checked").each(function() {
-                    total += parseInt($(this).val());
-                });
+        @if ($message = Session::get('success'))
+        <div class="container">
+        <div class="row">
+            <div class="modal fade" id="ignismyModal" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label=""><span>×</span></button>
+                        </div>
                 
-                if (total == 0) {
-                    $('#amount').val('');
-                } else {                
-                    $('#amount').val(total);
-                }
+                        <div class="modal-body">
+                            <div class="thank-you-pop">
+                            <img src="http://goactionstations.co.uk/wp-content/uploads/2017/03/Green-Round-Tick.png" alt="">
+                            <p>{{ $message }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        @endif
+
+        <!-- ======= Footer ======= -->
+        
+        
+        <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+        @stack('prepend-script')
+        @include('includes.script')
+        @stack('addon-script')
+        <script>
+        @if ($message = Session::get('success'))
+            $(function() {
+                $('#ignismyModal').modal('show');
             });
-        });    
-    </script>
-    <script>
-        $(document).ready(function() {
-            (function() {
-                var showChar = 22;
-                var ellipsestext = " ...";
+        @endif
+        </script>
+        
+        <script>
+            $(document).ready(function() {
+                (function() {
+                    var showChar = 22;
+                    var ellipsestext = " ...";
 
-                $(".truncate").each(function() {
-                    var content = $(this).html();
-                    if (content.length > showChar) {
-                        var c = content.substr(0, showChar);
-                        var h = content;
-                        var html =
-                        c +
-                        '<span class="moreellipses">' +
-                        ellipsestext;
+                    $(".truncate").each(function() {
+                        var content = $(this).html();
+                        if (content.length > showChar) {
+                            var c = content.substr(0, showChar);
+                            var h = content;
+                            var html =
+                            c +
+                            '<span class="moreellipses">' +
+                            ellipsestext;
 
-                        $(this).html(html);
+                            $(this).html(html);
+                        }
+                    });
+                    /* end iffe */
+                })();
+
+            /* end ready */
+            });
+
+        </script>
+
+        <script>
+            function search_animal() {
+                let input = document.getElementById('searchbar').value
+                input=input.toLowerCase();
+                let x = document.getElementsByClassName('animals');
+                
+                for (i = 0; i < x.length; i++) { 
+                    if (!x[i].innerHTML.toLowerCase().includes(input)) {
+                        x[i].style.display="none";
                     }
-                });
-                /* end iffe */
-            })();
+                    else {
+                        x[i].style.display="cek";                 
+                    }
+                }
+            }
+        </script>
 
-        /* end ready */
-        });
-
-    </script>
-</body>
-
+        
+        
+        
+        
+    </body>
+    <footer>
+        @include('includes.footer')
+    </footer>
 </html>

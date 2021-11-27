@@ -17,11 +17,15 @@ class Transaction extends Model
      */
     protected $fillable = [
         'users_id',
-        'insurance_price',
+        'payment_url',
         'shipping_price',
         'transaction_status',
         'total_price',
         'code',
+        'ekspedisi',
+        'bayar_time',
+        'shipping_time'
+
     ];
 
     /**

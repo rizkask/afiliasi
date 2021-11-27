@@ -50,7 +50,7 @@
                                                     <img src="{!! Storage::url($item->galleries->first()->image ?? '') !!}" alt="" class="tita img-thumbnail">
                                             </div> 
                                             <div class="col-sm">
-                                                <h6>{{ $item->name}} <text style="color:rgb(180, 180, 180);">by {{ $item->user->store_name }}</text></h6>
+                                                <h6>{{ $item->name}} </h6>
                                                 <h6>@currency($item->price)</h6>
                                                 <h6>Komisi: <b>@currency($item->komisi)</b></h6>
                                                 

@@ -20,7 +20,7 @@
       <span>Dashboard</span></a>
   </li>
 
-  <li class="nav-item {{ (request()->routeIs('product-seller')) || (request()->routeIs('product-seller-create')) ? 'active' : '' }}">
+  <!--<li class="nav-item {{ (request()->routeIs('product-seller')) || (request()->routeIs('product-seller-create')) ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('product-seller',$parameter) }}">
       <i class="fas fa-fw fa-box-open"></i>
       <span>Product</span></a>
@@ -30,7 +30,7 @@
     <a class="nav-link" href="{{ route('transaction-seller',$parameter) }}">
       <i class="fas fa-fw fa-dollar-sign"></i>
       <span>Transaction</span></a>
-  </li>
+  </li>-->
 
   <li class="nav-item {{ (request()->routeIs('affiliate')) || (request()->routeIs('list-affiliate')) || (request()->routeIs('my-product-aff')) || (request()->routeIs('affiliate-transaction')) || (request()->routeIs('afiliator')) 
   || (request()->routeIs('affiliate-transaction')) || (request()->routeIs('owner')) || (request()->routeIs('bukti')) || (request()->routeIs('afiliator')) || (request()->routeIs('afiliator-trans')) || (request()->routeIs('pilih-affiliate')) || (request()->routeIs('detail-owner')) ? 'active' : '' }}">
@@ -41,17 +41,16 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item {{ (request()->routeIs('list-affiliate')) || (request()->routeIs('affiliate-transaction'))  ? 'active' : '' }}" href="{{ route('list-affiliate', $parameter) }}">Rekomendasi Saya</a>
             <a class="collapse-item {{ (request()->routeIs('owner')) || (request()->routeIs('bukti')) || (request()->routeIs('detail-owner')) ? 'active' : '' }}" href="{{ route('owner', $parameter) }}">Pengajuan Komisi</a>
-            <a class="collapse-item {{ (request()->routeIs('my-product-aff')) || (request()->routeIs('afiliator')) || (request()->routeIs('afiliator-trans'))  ? 'active' : '' }}" href="{{ route('my-product-aff', $parameter) }}">Produk Afiliasi</a>
             
           </div>
       </div>
   </li>
 
-  <li class="nav-item {{ (request()->routeIs('setting'))  ? 'active' : '' }}">
+  <!--<li class="nav-item {{ (request()->routeIs('setting'))  ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('setting',$parameter) }}">
       <i class="fas fa-fw fa-store"></i>
       <span>Setting</span></a>
-  </li>
+  </li>-->
 
   <hr class="sidebar-divider">
 

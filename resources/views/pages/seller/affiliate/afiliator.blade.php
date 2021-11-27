@@ -1,7 +1,7 @@
 @extends('layouts.seller')
 
 @section('title')
-    Seller Dashboard
+    Afiliasi
 @endsection
 
 @section('content')
@@ -47,21 +47,6 @@
                             <td>{{ $i }}</td><?php $i++ ?>
                               <?php $cek = user::where('id',$item->first()->ref)->first(); $total=0;?>
                             <td>{!! $cek->name !!}</td>
-                              <?php 
-                                  $claimed=0;
-                                  $r = claim::where('owner_id', Auth::user()->id)->where('confirm',0)->where('afiliator_id',$item->first()->ref)->get();
-
-                                  foreach($r as $s){
-                                      $claimed += $s->total_claim;
-                                  }
-
-                                  $confirm = 0;
-                                  $c = claim::where('owner_id', Auth::user()->id)->where('confirm',1)->where('afiliator_id',$item->first()->ref)->get();
-                                  
-                                  foreach($c as $p){
-                                    $confirm += $p->total_claim; 
-                                  }
-                              ?>
                             
                             <td>@currency($claimed)</td>
                             <td>@currency($confirm)</td>

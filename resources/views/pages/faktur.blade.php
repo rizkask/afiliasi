@@ -21,14 +21,16 @@
 		}
 	</style>
 	<center>
-		<h4>MARKETPLACE</h4>
+		<h4>TOKO ONLINE</h4>
 	</center>
 
 	<div class="row">
 		<div class="col-md-12">
 			<p style="font-size:13px;">
-				<b>Kode Transaksi:</b><br>
-				{{ $items->first()->transaction->code }}
+				<b>No. Pesanan:</b><br>
+				{{ $items->first()->transaction->code }}<br>
+				<b>Waktu Pembayaran:</b><br>
+				{{ $items->first()->transaction->bayar_time }}
 			</p>
 		</div>
 	</div>
@@ -43,11 +45,9 @@
 						{{ $items->first()->transaction->user->name }}<br>
 						<b>Alamat:</b><br>
 						{{ $items->first()->transaction->user->address_one }}, 
-						{{ $items->first()->transaction->user->regency->name }}, {{ $items->first()->transaction->user->province->name }}, {{ $items->first()->transaction->user->zip_code}}<br>
-						<b>No. Handphone Pembeli:</b><br>
+						{{ $items->first()->transaction->user->regencies_name }}, {{ $items->first()->transaction->user->provinces_id }}, {{ $items->first()->transaction->user->zip_code}}<br>
+						<b>No. Handphone:</b><br>
 						{{ $items->first()->transaction->user->phone_number}}<br>
-						<b>Nama Toko Penjual:</b><br>
-						{{ $items->first()->product->user->store_name }}
 					</p>
 				</div>
 			</div>
@@ -73,9 +73,9 @@
 			<tr>
 				<td>{{ $i++ }}</td>
 				<td>{{ $item->product->name }}</td>
-				<td>@currency($item->product->price)</td>
+				<td>@currency($item->price / $item->quantity)</td>
 				<td>{{ $item->quantity }}</td>
-				<td>@currency($item->quantity*$item->product->price) </td>
+				<td>@currency($item->price) </td>
 			</tr>
 		@endforeach
 		</tbody>
@@ -84,6 +84,8 @@
 	<div class="row" style="text-align:right;">
 		<div class="col-md-12">
 			<p style="font-size:13px;">
+				Subtotal untuk Produk: @currency($items->first()->transaction->total_price - $items->first()->transaction->shipping_price)<br>
+				Subtotal Pengiriman: @currency($items->first()->transaction->shipping_price)<br>
 				<b>Total Pembayaran: @currency($items->first()->transaction->total_price)</b><br>
 			</p>
 		</div>

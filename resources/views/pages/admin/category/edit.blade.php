@@ -29,10 +29,6 @@
                         <input type="text" class="form-control" name="name" placeholder="Judul" value="{{ $item->name }}" required>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="image">Gambar</label>
-                        <input type="file" class="form-control" name="image" placeholder="Gambar" required>
-                    </div>
                     <button type="submit" class="btn btn-primary btn-block">
                         Simpan
                     </button>

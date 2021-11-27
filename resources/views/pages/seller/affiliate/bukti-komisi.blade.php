@@ -1,7 +1,7 @@
 @extends('layouts.seller')
 
 @section('title')
-    Seller Dashboard
+Afiliasi
 @endsection
 
 @section('content')
@@ -30,7 +30,6 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                        <th>Toko</th>
                         <th>Total Komisi</th>
                         <th>Bukti Transfer</th>
                         <th>Aksi</th>
@@ -46,7 +45,6 @@
                               $toko = claim::where('id', $cek->first()->claim_id)->get();
                               $owner = user::where('id', $toko->first()->owner_id)->get();
                           ?>
-                          <td>{{ $owner->first()->store_name }}</td>
                           <td>{{ $toko->first()->total_claim }}</td>
                           <td>
                               <a href="{{ Storage::url($cek->first()->image) }}" class="href" >

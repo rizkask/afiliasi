@@ -7,7 +7,7 @@
     <section id="about-us" class="about-us ">
         <div class="container">
             <div class="row">
-                <div class="col-md-5 pl-lg-0">
+                <div class="col-md-4 pl-lg-0">
                     <div class="gallery">
                         <div class="xzoom-container image">
                             <img
@@ -31,14 +31,41 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-7 pl-0 pl-lg-5 pr-lg-1 align-items-stretch">
+                <div class="col-md-4 pl-0 pl-lg-5 pr-lg-1 align-items-stretch">
                     <div class="content flex-column justify-content-center">
                         <div class="row">
-                            <div class="col-md-12 icon-box">
-                                <div class="card card-details card-right">
+                            <div class="col-md-12">
                                     <h2>{{ $product->name }}</h2>
                                     <p>Terjual {{ $product->sold }}</p>
                                     <hr>
+
+                                    <p><b>Deskripsi</b><br>
+                                        {!! $product->description !!}</p>
+                                    <?php
+                                        $parameter= Crypt::encrypt($product->id);
+                                    ?>
+                                        <!--<tr>
+                                            <th>Variasi</th>
+                                            <td>
+                                                <div class="row variant">
+                                                    <input type="radio" id="1" name="button-checkbox" class="variasi"><label for="1">Success Button</label></input>
+                                                    <input type="radio" id="2" name="button-checkbox" class="variasi"><label for="2">Success Button</label></input>
+                                                    <input type="radio" id="3" name="button-checkbox" class="variasi"><label for="3">Success Button</label></input>
+                                                    <input type="radio" id="3" name="button-checkbox" class="variasi"><label for="3">Success Button</label></input>
+                                                    <input type="radio" id="3" name="button-checkbox" class="variasi"><label for="3">Success Button</label></input>
+                                                    <input type="radio" id="3" name="button-checkbox" class="variasi"><label for="3">Success Button</label></input>
+                                                </div>
+                                            </td>
+                                        </tr>-->
+                            </div>
+                                
+                        </div>
+                    </div><!-- End .content-->
+                </div>
+                <div class="col-md-4 pl-0 pl-lg-5 pr-lg-1 align-items-stretch">
+                    <div class="content flex-column justify-content-center">
+                        <div class="row">
+                                <div class="card card-details card-right">
                                     @auth
                                     <?php
                                         $parameter= Crypt::encrypt($product->id);
@@ -46,10 +73,9 @@
                                     <form action="{{ route('add_to_cart', $parameter) }}" method="post">
                                         @csrf
                                         <table class="trip-informations">
-                                            <input type='hidden' name="pemilik_id" value="{{ $product->users_id }}"/>
                                             <tr>
-                                                <th>Kategori</th>
-                                                <td>
+                                                <th width="40%">Kategori</th>
+                                                <td width="60%">
                                                     {{ $product->category->name }}
                                                 </td>
                                             </tr>
@@ -60,14 +86,8 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th>Pengiriman dari</th>
-                                                <td>
-                                                    tddcgcnfhjgv
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Jumlah</th>
-                                                <td>
+                                                <th width="50%">Jumlah</th>
+                                                <td width="50%">
                                                     <input type='button' value="-" class='qtyminus' field='quantity' onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty > 1 ) result.value--;return false;"/>
                                                     <input type='text' id="qty" name='quantity' value='1' class='qty' />
                                                     <input type='button' value="+" class='qtyplus' field='quantity'onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;"/>
@@ -88,12 +108,9 @@
                                             </tr>-->
                                         </table>
                                         <div class="bates">
-                                        @if($product->user->id != Auth::user()->id)
                                             <button type="submit" class="btn btn-sm">
                                             Masukkan Keranjang
                                             </button>
-                                        @else
-                                        @endif
                                         </div>
                                     </form>
                                     @else
@@ -105,14 +122,8 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th>Pengiriman dari</th>
-                                                <td>
-                                                    tddcgcnfhjgv
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Jumlah</th>
-                                                <td>
+                                                <th width="50%">Jumlah</th>
+                                                <td width="50%">
                                                     <input type='button' value="-" class='qtyminus' field='quantity' onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty > 1 ) result.value--;return false;"/>
                                                     <input type='text' id="qty" name='quantity' value='1' class='qty' />
                                                     <input type='button' value="+" class='qtyplus' field='quantity'onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;"/>
@@ -141,51 +152,16 @@
                                         </div>
                                     @endauth
                                 </div>
-                            </div>
                         </div>
                     </div><!-- End .content-->
                 </div>
+                
             </div>
         </div>
     </section>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card head-toko fade show">
-                    <div class="card-body">
 
-                        <div class="profile-header-container pull-left mr-3">   
-                            <div class="profile-header-img">
-                                @if($product->user->image)
-                                <img class="img-circle" src="{{ url(Storage::url($product->user->image)) }}" />
-                                @else
-                                <img class="img-circle" src="{{ url('assets/img/store-default.png') }}" />
-                                @endif
-                            </div>
-                        </div> 
-                        <div class="row">
-                            <div class="col-sm info-profil-satu">
-                                <h4>{{ $product->user->store_name }}</h4>
-                                <p>{{ $product->user->regency->name }}</p>
-                                <h6><a href="{{ route('profil-toko', $product->user->slug) }}"><i class="fas fa-fw fa-store"></i>   Kunjungi Toko</a></h6>
-                            </div>
-                            <div class="vl"></div>
-                            <div class="col-sm info-profil">
-                            <?php
-                                $sum=product::where('users_id',$product->user->id)->count();
-                            ?>
-                                <h6><span>Produk:</span> {{ $sum }}</h6>
-                                <h6><span>Produk Terjual:</span> {{ $sold }}</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
+    <!--<div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="card head-toko fade show" >
@@ -198,7 +174,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 
 </main>
 @endsection

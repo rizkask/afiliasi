@@ -21,7 +21,7 @@ class PesanansayaController extends Controller
         $totalPrice = 0;
         $item = TransactionDetail::whereHas('transaction', function($transaction){
             $transaction->where('users_id',Auth::user()->id);
-        })->get()->groupby('transactions_id');
+        })->orderBy('created_at','desc')->get()->groupby('transactions_id');
 
         return view('pages.pesanan-saya',[
             'items' => $item,
@@ -33,7 +33,7 @@ class PesanansayaController extends Controller
     {
         $item = TransactionDetail::where('shipping_status','SHIPPING')->whereHas('transaction', function($transaction){
             $transaction->where('users_id',Auth::user()->id);
-        })->get()->groupby('transactions_id');
+        })->orderBy('created_at','desc')->get()->groupby('transactions_id');
 
         return view('pages.sent',[
             'items' => $item
@@ -44,7 +44,7 @@ class PesanansayaController extends Controller
     {
         $item = TransactionDetail::where('shipping_status','SUCCESS')->whereHas('transaction', function($transaction){
             $transaction->where('users_id',Auth::user()->id);
-        })->get()->groupby('transactions_id');
+        })->orderBy('created_at','desc')->get()->groupby('transactions_id');
 
         return view('pages.done',[
             'items' => $item
@@ -53,11 +53,35 @@ class PesanansayaController extends Controller
 
     public function cancel($id)
     {
-        $item = TransactionDetail::where('shipping_status','FAILED')->whereHas('transaction', function($transaction){
-            $transaction->where('users_id',Auth::user()->id);
-        })->get()->groupby('transactions_id');
+        $item = TransactionDetail::where('shipping_status','PENDING')->whereHas('transaction', function($transaction){
+            $now = \Carbon\Carbon::now()->subMinutes(1440);
+            $transaction->where('users_id',Auth::user()->id)->where('created_at','<',$now);
+        })->orderBy('created_at','desc')->get()->groupby('transactions_id');
 
         return view('pages.cancel',[
+            'items' => $item
+        ]);
+    }
+
+    public function unpay($id)
+    {
+        $item = TransactionDetail::whereHas('transaction', function($transaction){
+            $now = \Carbon\Carbon::now()->subMinutes(1440);
+            $transaction->where('users_id',Auth::user()->id)->where('transaction_status','PENDING')->where('created_at','>=',$now);
+        })->orderBy('created_at','desc')->get()->groupby('transactions_id');
+
+        return view('pages.unpay',[
+            'items' => $item
+        ]);
+    }
+
+    public function dikemas($id)
+    {
+        $item = TransactionDetail::where('shipping_status','DIKEMAS')->whereHas('transaction', function($transaction){
+            $transaction->where('users_id',Auth::user()->id)->where('transaction_status','SUCCESS');
+        })->orderBy('created_at','desc')->get()->groupby('transactions_id');
+
+        return view('pages.dikemas',[
             'items' => $item
         ]);
     }
@@ -65,9 +89,8 @@ class PesanansayaController extends Controller
     public function belilagi($code)
     {
         $data = Crypt::decrypt($code);
-        dd($data);
 
-        $items = TransactionDetail::where('transactions_id',$id)->get();
+        $items = TransactionDetail::where('transactions_id',$data)->get();
 
         foreach($items as $item){
             $cekproduct = cart::where('products_id',$item->product->id)->where('users_id',Auth::user()->id)->first();
@@ -75,7 +98,6 @@ class PesanansayaController extends Controller
             $data = [
                 'products_id' => $item->product->id,
                 'users_id' => Auth::user()->id,
-                'pemilik_id' => $item->product->user->id,
                 'quantity' => $item->quantity,
             ];
             cart::create($data);
@@ -95,11 +117,11 @@ class PesanansayaController extends Controller
 
         $item = Transaction::where('code',$code)->first();
 
-        $detail = TransactionDetail::where('transactions_id',$item->id)->where('shipping_status','SHIPPING')->first();
+        $detail = TransactionDetail::where('transactions_id',$item->id)->get()->groupby('transactions_id');
 
         return view('pages.rincian-pesanan',[
             'items' => $item,
-            'detail' => $detail,
+            'details' => $detail,
         ]);
     }
 
@@ -114,6 +136,21 @@ class PesanansayaController extends Controller
                 ]);
 
     	return $pdf->download('invoice');
+    }
+
+    public function konfirmasipesanan($code, $id)
+    {
+        $data = TransactionDetail::findOrFail($code);
+
+        $items = TransactionDetail::where('transactions_id',$data->transactions_id)->get();
+
+        foreach($items as $item){
+            $item->update([
+                'shipping_status' => 'SUCCESS',
+            ]);
+        }
+
+        return redirect()->back();
     }
     
 }

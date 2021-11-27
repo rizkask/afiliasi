@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    marketplace
+    Toko Online
 @endsection
 
 @section('content')
@@ -55,14 +55,43 @@
         </section>-->
 
         <hr width="82%">
+        <section id="contact" class="contact">  
+            <div class="container">
+                <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="info-wrap">
+                        <div class="row">
+                            <div class="col-lg-4 info">
+                            <i class="icofont-google-map"></i>
+                            <h4>Lokasi:</h4>
+                            <p>{{ $contact->address_one }}, {{ $contact->regencies_name }}, {{ $contact->provinces_id }}</p>
+                            </div>
 
+                            <div class="col-lg-4 info mt-4 mt-lg-0">
+                            <i class="icofont-envelope"></i>
+                            <h4>E-mail:</h4>
+                            <p>{{ $contact->email }}</p>
+                            </div>
+
+                            <div class="col-lg-4 info mt-4 mt-lg-0">
+                            <i class="icofont-phone"></i>
+                            <h4>Telepon:</h4>
+                            <p>{{ $contact->phone_number }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </section>
+        <hr width="82%">
 
         <!-- ======= Hotels Section ======= -->
         <section id="hotels" class="section-with-bg wow fadeInUp">
 
             <div class="container">
                 <div class="section-title">
-                    <h2>Recommendation</h2>
+                    <h2>Rekomendasi</h2>
                 </div>
 
                 <div class="row recommend">
@@ -76,7 +105,6 @@
                             </div>
                             <a href="{{ route('detail', $product->slug) }}"><h3 class="truncate">{{ $product->name }}</h3></a>
                             <p><a href="{{ route('detail', $product->slug) }}">@currency($product->price)</a></p>
-                            <a href="{{ route('detail', $product->slug) }}"><h6>{{ $product->user->regency->name }}</h6></a>
                         </div>
                     </div>
                 @endforeach

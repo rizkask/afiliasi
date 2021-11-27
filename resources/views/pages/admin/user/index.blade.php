@@ -5,12 +5,8 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-    <h1 class="h3 mb-0 text-gray-800">User</h1>
-
-    <div class="tombol d-sm-flex align-items-center justify-content-end mb-4">
-        <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary shadow-sm">
-            <i class="fas fa-plus fa-sm text-white-50"></i>Tambah User
-        </a>
+    <div class="tombol d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">User</h1>
     </div>
 
     <div class="card show mb-4">
@@ -22,7 +18,8 @@
                             <th>No.</th>
                             <th>Nama</th>
                             <th>Email</th>
-                            <th>Roles</th>
+                            <th>Alamat</th>
+                            <th>No. Telepon</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -31,10 +28,25 @@
                                 
                         @forelse($items as $item)
                             <tr>
-                                <td>{{ $i }}</td><?php $i++ ?>
+                                <td class="text-center">{{ $i }}.</td><?php $i++ ?>
                                 <td>{!! $item->name !!}</td>
+                                @if($item->email_verified_at != NULL)
+                                <td>{!! $item->email !!} <i class="fas fa-fw fa-check-circle" style="color:#1eb4eb;"></i></td>
+                                @else
                                 <td>{!! $item->email !!}</td>
-                                <td>{!! $item->roles !!}</td>
+                                @endif
+                                @if($item->address_one)
+                                <td>{!! $item->address_one !!}, {{ $item->regencies_name }}<br>
+                                    {{ $item->provinces_id }}, {{ $item->zip_code }}
+                                </td>
+                                @else
+                                <td>-</td>
+                                @endif
+                                @if($item->phone_number)
+                                <td>{!! $item->phone_number !!}</td>
+                                @else
+                                <td>-</td>
+                                @endif
                                 <td class="text-center">
                                     <a href="{{ route('user.edit', $item->id) }}" class="btn btn-outline-info btn-round"> 
                                         <i class="fa fa-pencil-alt"></i>

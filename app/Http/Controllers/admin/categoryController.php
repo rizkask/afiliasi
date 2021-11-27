@@ -45,7 +45,6 @@ class CategoryController extends Controller
         $data = $request->all();
 
         $data['slug'] = Str::slug($request->name);
-        $data['image'] = $request->file('image')->store('assets/category','public');
 
         category::create($data);
 
@@ -90,7 +89,6 @@ class CategoryController extends Controller
         $data = $request->all();
 
         $data['slug'] = Str::slug($request->name);
-        $data['image'] = $request->file('image')->store('assets/category','public');
 
         $item = category::findorfail($id);
 

@@ -1,14 +1,12 @@
 @extends('layouts.app')
 
 @section('title')
-    marketplace
+    Toko Online
 @endsection
 
 @section('content')
-<section id="hotels"  class="section-bg" >
+<section id="hotels"  >
     <div class="container">
-
-    
 
     <div class="row">
         <div class="col-lg-12">
@@ -21,16 +19,16 @@
         </div>
     </div>
 
-    <div class="row recommend portfolio-container">
+    <div class="row recommend">
         @foreach($products as $product)
-            <div class="cek portfolio-item filter-{{$product->category->name}}">
+            <div class="cek filter-{{$product->category->name}}">
                 <div class="hotel">
                     <div class="hotel-img">
                         <a href="{{ route('detail', $product->slug) }}">
                             <img src="{{ url($product->galleries->count() ? Storage::url($product->galleries->first()->image) : '') }}" alt="...">
                         </a>
                     </div>
-                    <a href="{{ route('detail', $product->slug) }}"><h3>{{ $product->name }}</h3></a>
+                    <a href="{{ route('detail', $product->slug) }}"><h3 class="truncate animals">{{ $product->name }}</h3></a>
                     <p><a href="{{ route('detail', $product->slug) }}">@currency($product->price)</a></p>
                 </div>
             </div>
@@ -44,8 +42,8 @@
 @push('addon-script')
 <script>
   // Porfolio isotope and filter
-  var portfolioIsotope = $('.portfolio-container').isotope({
-    itemSelector: '.portfolio-item',
+  var portfolioIsotope = $('.recommend').isotope({
+    itemSelector: '.cek',
     layoutMode: 'fitRows'
   });
 

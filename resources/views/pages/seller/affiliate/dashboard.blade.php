@@ -1,7 +1,7 @@
 @extends('layouts.seller')
 
 @section('title')
-    Seller Dashboard
+Afiliasi
 @endsection
 
 @section('content')
@@ -32,7 +32,6 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                        <th>Toko</th>
                         <th>Komisi Diterima</th>
                         <th>Komisi Claimed</th>
                         <th>Komisi Baru</th>
@@ -46,7 +45,6 @@
                       <tr>
                           <?php $total=0; 
                           $claimed=0; ?>
-                          <td>{{ $item->first()->product->user->store_name }}</td>
                             <?php 
                               $w=$item->where('claims_id','!=',NULL);
                               foreach($w as $p){

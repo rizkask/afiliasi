@@ -1,7 +1,7 @@
 @extends('layouts.seller')
 
 @section('title')
-    Seller Dashboard
+Afiliasi
 @endsection
 
 @section('content')
@@ -31,10 +31,8 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                        <th>Kode</th>
                         <th>Pembeli</th>
                         <th>Produk</th>
-                        <th>Pemilik</th>
                         <th>Komisi</th>
                         <th>Status</th>
                         <th>Tanggal</th>
@@ -44,11 +42,9 @@
                       <?php $i=1 ?>
                               
                     @forelse($transaction as $item)
-                      <tr>
-                          <td>{{ $item->code }}</td><?php $i++ ?>
+                      <tr><?php $i++ ?>
                           <td>{{ $item->transaction->user->name }}</td>
                           <td>{!! $item->product->name !!}</td>
-                          <td>{!! $item->product->user->store_name !!}</td>
                           <td>{!! $item->product->komisi !!}</td>
                           <td>{!! $item->ref_status_label !!}</td>
                           <td>{{ $item->created_at }}</td>

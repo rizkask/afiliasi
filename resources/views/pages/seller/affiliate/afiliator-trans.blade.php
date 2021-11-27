@@ -1,7 +1,7 @@
 @extends('layouts.seller')
 
 @section('title')
-    Seller Dashboard
+    Afiliasi
 @endsection
 
 @section('content')
@@ -47,7 +47,7 @@
                             <?php $cek = user::where('id',$item->afiliator_id)->get(); ?>
                             <td>{{ $cek->first()->name }}</td>
                             <td>@currency($item->total_claim)</td>
-                            <td>{{ $item->created_at }}</td>
+                            <td>{{ $item->created_at->addMinutes(421) }}</td>
                             <td>
                               <?php $tes = bukti::where('claim_id',$item->id)->get();?>
                               @if($tes->count() > 0)

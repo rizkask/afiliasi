@@ -18,16 +18,8 @@ class DetailController extends Controller
                 ->firstOrFail();
         $transaksi = TransactionDetail::where('products_id', $item->id)->get();
 
-        $sell = product::where('users_id', $item->users_id)->get();
-
-        $sold=0;
-        foreach($sell as $q){
-            $sold += $q->sold;
-        }
-
         return view('pages.detail',[
             'product' => $item,
-            'sold' => $sold,
         ]);
     }
 

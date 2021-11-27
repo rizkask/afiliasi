@@ -1,7 +1,7 @@
 @extends('layouts.seller')
 
 @section('title')
-    Seller Dashboard
+Afiliasi
 @endsection
 
 @section('content')
@@ -34,18 +34,6 @@
                             <div class="card-body">
                                 <div class="profile-header-container pull-left">  
                                     <div class="row">
-                                        <div class="profile-header-img">
-                                            @if($item->first()->product->user->image)
-                                            <img class="img-circle" src="{{ url(Storage::url($item->first()->product->user->image)) }}" />
-                                            @else
-                                            <img class="img-circle" src="{{ url('assets/img/store-default.png') }}" />
-                                            @endif
-                                        </div>
-                                        <div class="col-sm info-profil">
-                                            <h5><b>{{ $item->first()->product->user->store_name }}</b></h5>
-                                            <p>{{ $item->first()->product->user->regency->name }}</p>
-                                        </div>
-                                        <div class="vl"></div>
                                         <div class="col-sm info-profil ajukan">
                                             <?php $total=0; 
                                               $claimed=0;

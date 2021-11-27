@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Epic Tour Admin</title>
+  <title>Toko Online Admin</title>
 
   @include('includes.admin.style')
   
@@ -50,7 +50,7 @@
 
   <!-- Logout Modal-->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog .modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Anda yakin ingin keluar?</h5>
@@ -74,6 +74,7 @@
     
 
   @include('includes.admin.script')
+  @stack('addon-script')
   <script>
     
 
@@ -103,6 +104,23 @@
       }
 
   </script>
+  <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#category-img-tag').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#cat_image").change(function(){
+            readURL(this);
+        });
+    </script>
   
 </body>
 

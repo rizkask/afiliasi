@@ -25,7 +25,6 @@ class categoryRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'image' => 'required|image',
         ];
     }
 }

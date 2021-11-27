@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\admin\productRequest;
 use Illuminate\Support\Str;
 use App\Models\product;
+use App\Models\productgallery;
 use App\Models\user;
 use App\Models\category;
 use Yajra\DataTables\Facades\DataTables;
@@ -55,7 +56,14 @@ class ProductController extends Controller
 
         $data['slug'] = Str::slug($request->name);
 
-        product::create($data);
+        $product = product::create($data);
+
+        $gallery = [
+            'products_id' => $product->id,
+            'image' => $request->file('image')->store('assets/product','public'),
+        ];
+
+        productgallery::create($gallery);
 
         return redirect()->route('product.index');
     }
@@ -80,12 +88,10 @@ class ProductController extends Controller
     public function edit($id)
     {
         $item = product::findorfail($id);
-        $user = user::get();
         $category = category::get();
 
         return view('pages.admin.product.edit',[
             'item' => $item,
-            'users' => $user,
             'categories' => $category
         ]);
     }
@@ -122,5 +128,32 @@ class ProductController extends Controller
         $item->delete();
 
         return redirect()->route('product.index');
+    }
+
+    public function deletegallery(Request $request,$id)
+    {
+        $item = productgallery::findorFail($id);
+        $item->delete();
+
+        return redirect()->back();
+    }
+
+    public function uploadgallery(Request $request)
+    {
+        $data = $request->all();
+
+        $cek = productgallery::where('products_id',$request->products_id)->count();
+
+        if($cek<4){
+            $data['image'] = $request->file('image')->store('assets/product','public');
+
+            productgallery::create($data);
+
+            return redirect()->back();
+        }
+        else{
+            return redirect()->back()->with(['error' => 'Maksimal 4 foto tiap produk']);
+        }
+        
     }
 }

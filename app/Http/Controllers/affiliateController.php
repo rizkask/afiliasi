@@ -37,7 +37,7 @@ class AffiliateController extends Controller
         $owner = User::findOrFail($id);
         $product = product::where('users_id', $owner->id)->get();
 
-        $transaction = TransactionDetail::where('ref',Auth::user()->id)->orderBy('created_at','DESC')->where('users_id',$owner->id)->get();
+        $transaction = TransactionDetail::where('ref',Auth::user()->id)->orderBy('created_at','DESC')->get();
         
 
         return view('pages.seller.affiliate.detail-owner',[
@@ -99,7 +99,7 @@ class AffiliateController extends Controller
         $x = $transaction->groupby('users_id');
 
         $total=0; 
-        $y=TransactionDetail::where('claims_id',NULL)->where('users_id',$own->users_id)->get();
+        $y=TransactionDetail::where('claims_id',NULL)->get();
 
         foreach($y as $p){
             $total += $p->product->komisi;
@@ -126,7 +126,7 @@ class AffiliateController extends Controller
         return redirect()->back();
     }
 
-    public function afiliator($id)
+    /**public function afiliator($id)
     {
         $data = Crypt::decrypt($id);
         $user = User::findOrFail($data);
@@ -140,7 +140,7 @@ class AffiliateController extends Controller
             'user' => $user,
             'transaction' => $transaction,
         ]);
-    }
+    }**/
 
     public function afiliatortrans($id)
     {

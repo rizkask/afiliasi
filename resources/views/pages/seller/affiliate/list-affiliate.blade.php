@@ -1,7 +1,7 @@
 @extends('layouts.seller')
 
 @section('title')
-    Tambah Produk
+    Tambah Produk Afiliasi
 @endsection
 
 @section('content')
@@ -42,7 +42,6 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Product Name</th>
-                                <th>Toko</th>
                                 <th>Komisi</th>
                                 <th>Link</th>
                                 <th>Aksi</th>
@@ -55,7 +54,6 @@
                                 <tr>
                                     <td>{{ $i }}</td><?php $i++ ?>
                                     <td>{!! $aff->product->name !!}</td>
-                                    <td>{!! $aff->product->user->store_name !!}</td>
                                     <td>{!! $aff->product->komisi !!}</td>
                                     <td>
                                         @if($aff->product->affiliate==1)

@@ -5,7 +5,7 @@
         <div class="row">
 
           <div class="col-lg-12 text-center">
-          <span>Copyright &copy; Marketplace</span>
+          <span>Copyright &copy; Toko Online</span>
           </div>
 
         </div>
